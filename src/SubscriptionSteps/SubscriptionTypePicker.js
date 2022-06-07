@@ -9,7 +9,7 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels}
         e.preventDefault()
 
         let sl = stepLabels
-        sl.push({key:'Your susbcription: ', name:o.name})
+        sl[currentStep] = {key:'Your susbcription: ', name:o.name}
         setStepLabels(sl)
 
         incrementStep(o)

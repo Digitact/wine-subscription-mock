@@ -2,21 +2,23 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import Tick from "./assets/tick.png"
 
-export default({steps, currentStep}) => {
+export default({steps, currentStep, goToStep}) => {
     let rows = []
 
     for(let i = 0; i < Object.keys(steps).length; i++) {
+        let done = steps[i].done
         let style = 'complete-step'
+
+        if(done === false) {
+            style='incomplete-step'
+        }
+
         if(currentStep === i) {
             style = 'current-step'
         }
 
-        if(currentStep < i) {
-            style='incomplete-step'
-        }
-
         rows.push(
-        <Col className={style}>
+        <Col className={style} onClick={(e) => { e.preventDefault(); goToStep(i, done, style); } }>
         <Row className='p-3'>
             <Col>
             <h3 className='text-light'>

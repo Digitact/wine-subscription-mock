@@ -8,8 +8,42 @@ import CasePicker from './SubscriptionSteps/CasePicker';
 import AddToCart from './SubscriptionSteps/AddToCart';
 
 export default ({step}) => {
+    const stepsProto = {
+        0: 
+        {
+            name: 'Choose Product',
+            func: SubscriptionGroupsPicker,
+            done: false
+        },
+        1:
+        {
+            name: 'Your Subscription',
+            func: SubscriptionTypePicker,
+            done: false
+        },
+        2:
+        {
+            name: 'Delivery Frequency',
+            func: DeliveryFrequencyPicker,
+            done: false
+        }, 
+        3:
+        {
+            name: 'Choose Wines',
+            func: CasePicker,
+            done: false
+        },
+        4:
+        {
+            name: 'Finish!',
+            func: AddToCart,
+            done: false
+        }
+    };
+
+    const [steps, setSteps] = useState(stepsProto)
     const [stepIndex, setStepIndex] = useState(step)
-    const [stepData, setStepData] = useState(null)
+    const [stepData, setStepData] = useState([])
     const [stepLabels, setStepLabels] = useState([])
     const [loading, setLoading] = useState(true)
     const [jsonData, setJsonData] = useState(null)
@@ -47,45 +81,37 @@ export default ({step}) => {
         getSubscriptions();
     }, [])
 
-    const steps = {
-        0: 
-        {
-            name: 'Choose Product',
-            func: SubscriptionGroupsPicker,
-        },
-        1:
-        {
-            name: 'Your Subscription',
-            func: SubscriptionTypePicker
-        },
-        2:
-        {
-            name: 'Delivery Frequency',
-            func: DeliveryFrequencyPicker
-        }, 
-        3:
-        {
-            name: 'Choose Wines',
-            func: CasePicker
-        },
-        4:
-        {
-            name: 'Finish!',
-            func: AddToCart
+    if(stepLabels.length === 0) {
+        for(let i = 0; i < Object.keys(steps).length; i++) {
+            stepData.push(null)
+            stepLabels.push({key:'', name:''})
         }
-    };
+    }
 
     const incrementStep = (o) => {
         if(o) {
             let sd = stepData
-            sd.push(o)
+            sd[stepIndex+1] = o
             setStepData(sd)
         }
+
+        let s = steps
+        s[stepIndex].done = true
+        setSteps(s)
 
         if(stepIndex < Object.keys(steps).length) {
             setStepIndex(stepIndex+1)
         }
     }
+
+    const goToStep = (i, done, style) => {
+        if(done === false) return;
+
+        if(stepIndex >= 0 && stepIndex < Object.keys(steps).length) {
+            setStepIndex(i)
+        }
+    }
+
 
     let StepView = steps[stepIndex].func;
 
@@ -96,7 +122,7 @@ export default ({step}) => {
     return (
         <Container>
             <Row>
-            <FlowHeader steps={steps} currentStep={stepIndex}/>
+            <FlowHeader steps={steps} currentStep={stepIndex} goToStep={goToStep}/>
             </Row>
             <Row>
             
