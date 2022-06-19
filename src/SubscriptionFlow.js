@@ -8,7 +8,7 @@ import CasePicker from './SubscriptionSteps/CasePicker';
 import AddToCart from './SubscriptionSteps/AddToCart';
 
 export default ({step}) => {
-    const stepsProto = {
+    const stepsFixed = {
         0: 
         {
             name: 'Choose Product',
@@ -27,13 +27,7 @@ export default ({step}) => {
             func: DeliveryFrequencyPicker,
             done: false
         }, 
-        3:
-        {
-            name: 'Choose Wines',
-            func: CasePicker,
-            done: false
-        },
-        4:
+        3:        
         {
             name: 'Finish!',
             func: AddToCart,
@@ -41,12 +35,54 @@ export default ({step}) => {
         }
     };
 
-    const [steps, setSteps] = useState(stepsProto)
+    const stepsCustom = {
+        0: 
+        {
+            name: 'Choose Product',
+            func: SubscriptionGroupsPicker,
+            done: false,
+            customStep: false
+        },
+        1:
+        {
+            name: 'Your Subscription',
+            func: SubscriptionTypePicker,
+            done: false,
+            customStep: false
+        },
+        2:
+        {
+            name: 'Delivery Frequency',
+            func: DeliveryFrequencyPicker,
+            done: false,
+            customStep: false
+        }, 
+        3:
+        {
+            name: 'Wines',
+            func: CasePicker,
+            done: false,
+            customStep: true
+        }, 
+        4:        
+        {
+            name: 'Finish!',
+            func: AddToCart,
+            done: false,
+            customStep: false
+        }
+    };
+
+    const [steps, setSteps] = useState(stepsCustom)
     const [stepIndex, setStepIndex] = useState(step)
     const [stepData, setStepData] = useState([])
     const [stepLabels, setStepLabels] = useState([])
     const [loading, setLoading] = useState(true)
     const [jsonData, setJsonData] = useState(null)
+    const [selectedProduct, setSelectedProduct] = useState("")
+    const [selectedSellingPlan, setSelectedSellingPlan] = useState("")
+    const [showCustom, setShowCustom] = useState(true)
+    const [customRules, setCustomRules] = useState([])
     
     const clubsEndpoint = "https://howards-folly-wine.digitact.co.uk/app/api/wineclubs/"
     const prodsEndpoint = "https://howards-folly-wine.digitact.co.uk/app/api/wineclubproducts/"
@@ -112,6 +148,11 @@ export default ({step}) => {
         }
     }
 
+    const switchCustom = (custom) => {
+        if(custom === false) setSteps(stepsFixed);
+        else setSteps(stepsCustom);
+    }
+
 
     let StepView = steps[stepIndex].func;
 
@@ -122,12 +163,25 @@ export default ({step}) => {
     return (
         <Container>
             <Row>
-            <FlowHeader steps={steps} currentStep={stepIndex} goToStep={goToStep}/>
+            <FlowHeader steps={steps} currentStep={stepIndex} goToStep={goToStep} showCustom={showCustom} />
             </Row>
             <Row>
             
                 <Col>
-                    <StepView currentStep={stepIndex} stepData={stepData} incrementStep={incrementStep} stepLabels={stepLabels} setStepLabels={setStepLabels}/>
+                    <StepView 
+                        currentStep={stepIndex} 
+                        stepData={stepData} 
+                        incrementStep={incrementStep} 
+                        stepLabels={stepLabels} 
+                        setStepLabels={setStepLabels} 
+                        selectedProduct={selectedProduct} 
+                        setSelectedProduct={setSelectedProduct} 
+                        selectedSellingPlan={selectedSellingPlan}
+                        setSelectedSellingPlan={setSelectedSellingPlan}
+                        setShowCustom={setShowCustom}
+                        customRules={customRules}
+                        setCustomRules={setCustomRules}
+                    />
                 </Col>
             </Row>
         </Container>

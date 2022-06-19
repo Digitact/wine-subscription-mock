@@ -2,10 +2,10 @@ import React, {useState} from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import SideBySideDisplay from "../SideBySidePicker/SideBySideDisplay";
 
-export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels}) => {
+export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels, customRules}) => {
     const [caseCount, setCaseCount] = useState(0)
     
-    let caseSize = 6
+    let caseSize = 12
 
     const finishCase = (e) => {
         e.preventDefault()
@@ -42,7 +42,7 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels}
             </Row>
 
           <Row>
-              <SideBySideDisplay caseSize={caseSize} caseCount={caseCount} setCaseCount={setCaseCount}/>
+              <SideBySideDisplay caseSize={caseSize} caseCount={caseCount} setCaseCount={setCaseCount} customRules={customRules}/>
           </Row>
       </div>  
     )

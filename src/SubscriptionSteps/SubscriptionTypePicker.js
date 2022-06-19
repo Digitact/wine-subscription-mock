@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
 
-export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels}) => {
+export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels, setSelectedSellingPlan}) => {
     let cols = []
     const sellingPlanGroups = stepData[currentStep].selling_plan_groups
     
@@ -11,6 +11,8 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels}
         let sl = stepLabels
         sl[currentStep] = {key:'Your susbcription: ', name:o.name}
         setStepLabels(sl)
+        //setSelectedSellingPlan(o.shopify_id)
+        //alert(o)
 
         incrementStep(o)
     }

@@ -3,14 +3,14 @@ import {Row, Col} from 'react-bootstrap';
 import GlobalPicker from './GlobalPicker';
 import CaseDiagram from './CaseDiagram';
 
-export default ({caseSize = 6, caseCount, setCaseCount}) => {
+export default ({caseSize = 6, caseCount, setCaseCount, customRules}) => {
     const [caseItems, setCaseItems] = useState([])
 
     return (
         <div className='mx-xl-5 mb-5 px-xl-5 pb-5'>
             <Row className='my-5 side-by-side'>
                 <Col md={6} className='px-xl-5 mx-xl-5'>
-                    <GlobalPicker caseSize={caseSize} caseItems={caseItems} setCaseItems={setCaseItems} caseCount={caseCount} setCaseCount={setCaseCount}/>
+                    <GlobalPicker caseSize={caseSize} caseItems={caseItems} setCaseItems={setCaseItems} caseCount={caseCount} setCaseCount={setCaseCount} customRules={customRules} />
                 </Col>
 
                 {/** sm=8 since the col moves to its own row */}

@@ -3,7 +3,7 @@ import {Button, Row, Col, Dropdown} from 'react-bootstrap';
 import {Strings, Language} from '../assets/Strings';
 import CaseItem from './CaseItem'
 
-export default({caseSize, caseItems, setCaseItems, caseCount, setCaseCount}) => {
+export default({caseSize, caseItems, setCaseItems, caseCount, setCaseCount, customRules}) => {
     const [loading, setLoading] = useState(true)
     const [totalItems, setTotalItems] = useState(0)
     const [defaultWines, setDefaultWines] = useState([])
@@ -33,7 +33,7 @@ export default({caseSize, caseItems, setCaseItems, caseCount, setCaseCount}) => 
 
     useEffect(() => {
         async function fillStock() {
-        
+        /*
             const fullPath = endpoint+apiArgs()
         
             fetch(fullPath)
@@ -58,6 +58,10 @@ export default({caseSize, caseItems, setCaseItems, caseCount, setCaseCount}) => 
             .finally(() => {
                 setLoading(false);
             });
+            */
+            setDefaultWines(customRules);
+            setStock(customRules);
+            setLoading(false);
         }
 
         fillStock();
