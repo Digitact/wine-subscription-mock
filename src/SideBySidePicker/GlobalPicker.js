@@ -11,7 +11,7 @@ export default({caseSize, caseItems, setCaseItems, caseCount, setCaseCount, cust
     const [firstRun, setFirstRun] = useState(true)
     const [stock, setStock] = useState([])
     
-    const endpoint = "https://howards-folly-wine.digitact.co.uk/test/api/casebuilder";
+    const endpoint = "https://wineclub-demo.digitact.co.uk/test/api/casebuilder";
     
     const _setTotalItems = (i) => {
         setTotalItems(i)

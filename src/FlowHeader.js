@@ -26,7 +26,7 @@ export default({steps, currentStep, goToStep}) => {
                     {i+1}
                     </h3>
                     </Col>
-                    {style === 'complete-step' ? <Col xs={4}><img className='float-right' src={'https://howards-folly-wine.digitact.co.uk/' + Tick} width={40} height={40}/></Col> : null}
+                    {style === 'complete-step' ? <Col xs={4}><img className='float-right' src={'https://wineclub-demo.digitact.co.uk/' + Tick} width={40} height={40}/></Col> : null}
                 </Row>
                 <p className='text-dark'>{steps[i].name}</p>
                 </Col>)       

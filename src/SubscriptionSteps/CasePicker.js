@@ -35,7 +35,7 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
                     </Row>
                     <Row className='d-flex align-items-center'>
                         <Button variant="light" onClick={(e) => finishCase(e)} disabled={caseCount!=caseSize} className='m-auto'>
-                            <Image src={"https://howards-folly-wine.digitact.co.uk" + CompleteOrderButton} width="100" />
+                            <Image src={"https://wineclub-demo.digitact.co.uk" + CompleteOrderButton} width="100" />
                         </Button>
                     </Row>
                 </Col>

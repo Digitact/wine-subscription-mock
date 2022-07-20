@@ -32,7 +32,7 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
                     {o.description}
                 </p>
                 <Button variant="light" onClick={(e) => selectDelivery(e, o)}>
-                    <Image src={"https://howards-folly-wine.digitact.co.uk" + SelectButton} width="100" />
+                    <Image src={"https://wineclub-demo.digitact.co.uk" + SelectButton} width="100" />
                 </Button>
             </Col>
         )

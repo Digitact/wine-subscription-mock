@@ -44,7 +44,7 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
             </p>
             <WineList wines={o.custom_case} />
             <Button variant="light" onClick={(e) => selectGroup(e, o)}>
-                <Image src={"https://howards-folly-wine.digitact.co.uk" + SelectButton} width="100" />
+                <Image src={"https://wineclub-demo.digitact.co.uk" + SelectButton} width="100" />
             </Button>
         </Col>
     )})

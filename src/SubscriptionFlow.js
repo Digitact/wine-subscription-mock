@@ -58,9 +58,9 @@ export default ({step}) => {
     const [selectedSellingPlan, setSelectedSellingPlan] = useState("")
     const [customRules, setCustomRules] = useState([])
     
-    const clubsEndpoint = "https://howards-folly-wine.digitact.co.uk/app/api/wineclubs/"
-    const prodsEndpoint = "https://howards-folly-wine.digitact.co.uk/app/api/wineclubproducts/"
-    const subEndpoint = "https://howards-folly-wine.digitact.co.uk/app/api/subscriptionoptions/"
+    const clubsEndpoint = "https://wineclub-demo.digitact.co.uk/app/api/wineclubs/"
+    const prodsEndpoint = "https://wineclub-demo.digitact.co.uk/app/api/wineclubproducts/"
+    const subEndpoint = "https://wineclub-demo.digitact.co.uk/app/api/subscriptionoptions/"
 
     const currencyCode = "gbp"
     

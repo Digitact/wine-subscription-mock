@@ -66,7 +66,7 @@ export default({selectedProduct, selectedSellingPlan, stepLabels, selectedProduc
                     })
                     }
                     <Button variant="light" onClick={(e) => addToShopify(e)}>
-                        <Image src={"https://howards-folly-wine.digitact.co.uk" + FinishButton} width="100" />
+                        <Image src={"https://wineclub-demo.digitact.co.uk" + FinishButton} width="100" />
                     </Button>
                     </Col>
                 </Row>
