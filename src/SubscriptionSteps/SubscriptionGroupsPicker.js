@@ -33,9 +33,14 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
     }
 
     products.forEach((o) => {
+        var imageUrl = o.image;
+        var backgroundUrl = "url('"+imageUrl+"')";
+        //'background-image':backgroundUrl,
         prodCols.push(
         <Col className='p-5'>
-            <img src={o.image} class="w-100" />
+            <div class="w-100" style={{ 'justify-content': 'center', 'align-items': 'center', 'display': 'flex', 'height':'300px' }}>
+                <img src={o.image} style={{ 'max-width':'100%', 'max-height':'100%', 'height': 'auto' }} />
+            </div>
             <h4>
             {o.product_title}
             </h4>

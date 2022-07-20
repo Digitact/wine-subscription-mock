@@ -14,7 +14,7 @@ export default({selectedProduct, selectedSellingPlan, stepLabels, selectedProduc
                 'selling_plan': selectedSellingPlan,
             }]
         };
-        alert(formData)
+        //alert(formData)
         fetch(window.Shopify.routes.root + 'cart/add.js', {
             method: 'POST',
             headers: {
