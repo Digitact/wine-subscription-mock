@@ -1,12 +1,13 @@
 import React from "react";
-import { Row, Col, Button } from "react-bootstrap";
+import { Row, Col, Button, Image } from "react-bootstrap";
+import SelectButton from '../assets/SelectButton.svg';
 
 export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels, setSelectedSellingPlan}) => {
     let cols = []
     const sellingPlanGroups = stepData[currentStep].selling_plan_groups
     
     const selectPlan = (e, o) => {
-        e.preventDefault()
+        if (e !== null) e.preventDefault()
 
         let sl = stepLabels
         sl[currentStep] = {key:'Your susbcription: ', name:o.name}
@@ -17,12 +18,16 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
         incrementStep(o)
     }
 
+    if (sellingPlanGroups.length===1) {
+        selectPlan(null,sellingPlanGroups[0]);
+    }
+
     sellingPlanGroups.forEach((o) => {
         cols.push(
         <Col className='p-5'>
         <h4>{o.name}</h4>
-        <Button onClick={(e) => selectPlan(e, o)}>
-            Select
+        <Button variant="light" onClick={(e) => selectPlan(e, o)}>
+            <Image src={"https://howards-folly-wine.digitact.co.uk" + SelectButton} width="100" />
         </Button>
         </Col>
         )

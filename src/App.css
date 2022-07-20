@@ -153,15 +153,18 @@ h3 {
 }
 
 .current-step {
-  background-color: #22aa33;
+  /* background-color: #0b5f16; */
+  border-bottom: 3px solid #0b5f16;
 }
 
 .complete-step {
-  background-color: #2233aa;
+  /* background-color: #181818; */
+  border-bottom: 3px solid #181818;
 }
 
 .incomplete-step {
-  background-color: #887777;
+  /* background-color: #887777; */
+  border-bottom: 3px solid #887777;
 }
 
 .scrollable {

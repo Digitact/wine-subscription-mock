@@ -3,7 +3,7 @@ import { Row, Col, Button } from "react-bootstrap";
 
 export default({wines}) => {
     return(
-        <div>
+        <div class="wine_list">
             <ul>
             {wines && wines.map((o) => {
                 return(

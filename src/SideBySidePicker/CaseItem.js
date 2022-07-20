@@ -2,8 +2,8 @@ import React, {useState} from "react";
 import {Row, Col, Button} from 'react-bootstrap';
 import {Strings, Language} from '../assets/Strings';
 
-export default({defaultItem = false, item, caseSize, totalItems, setTotalItems, caseItems, setCaseItems, bgClass}) => {
-  const [localQuantity, setLocalQuantity] = useState(0)  
+export default({defaultQuantity, item, caseSize, totalItems, setTotalItems, caseItems, setCaseItems, bgClass}) => {
+  const [localQuantity, setLocalQuantity] = useState(defaultQuantity)  
   
   const cur = Strings[Language].CaseItem;
   const Qty = cur['Quantity']
@@ -37,7 +37,10 @@ export default({defaultItem = false, item, caseSize, totalItems, setTotalItems, 
         if (q > 0 && q > o.min) {
           let c = [...caseItems];
           let ind = -1
+          //alert("o.min:"+o.min);
+          //alert("o.shopify_id:"+o.shopify_id);
           for(let i = 0; i < c.length; i++) {
+            //alert("c[i].shopify_id:"+c[i].shopify_id+" o.shopify_id:"+o.shopify_id);
             if(c[i].shopify_id === o.shopify_id) {
               ind = i;
               break;
@@ -68,19 +71,6 @@ export default({defaultItem = false, item, caseSize, totalItems, setTotalItems, 
                 className="px-5"
                 style={{ objectFit: "contain" }}/>
           </Row>
-          {defaultItem ? (
-            <>
-            <Row className='m-auto'>
-              <Col>
-                <p className="text-center">{Qty}: {item.min} ({Required})</p>
-              </Col>
-            </Row>
-            <Row>
-                <p className='text-center'>{item.vintage} {item.title}</p>
-            </Row>
-            </>
-          ) : (
-            <>
             <Row className="m-auto">
                 <Col xxs={3} md={3} className="w-25 d-flex justify-content-end p-0">
                     <Button
@@ -107,13 +97,12 @@ export default({defaultItem = false, item, caseSize, totalItems, setTotalItems, 
             </Row>
             <Row>
               <Col>
-                <p>Red</p>
+                <p>{item.wine_type}</p>
               </Col>
               <Col>
                 <p>{Limit} {item.max}</p>
               </Col>
             </Row>
-            </>)}
         </Col>
     )
 }

@@ -8,29 +8,40 @@ import GenericRed from '../assets/GenericRed.png'
 import GenericWhite from '../assets/GenericWhite.png'
 import GenericRose from '../assets/GenericRose.png'
 import GenericChampagne from '../assets/GenericChampagne.png'
+import WineOrange from '../assets/WineOrange.png'
+import WineSweet from '../assets/WineSweet.png'
+import WineFortified from '../assets/WineFortified.png'
 
 //TODO: Colour code the bottles!
 
 export default({caseSize, caseItems}) => {
     let validItems = []
     let itemIcons = []
-    for(let i = 0; i < caseSize; i++) {
-        if(caseItems.length > i) {
-            if(caseItems[i].title) {
-                validItems.push(true)
-                let icon = GenericRed
-                if (caseItems[i].type=="White") icon = GenericWhite
-                if (caseItems[i].type=="Rose") icon = GenericRose
-                if (caseItems[i].type=="Sparkling") icon = GenericChampagne
-                itemIcons.push(icon)
-            }
-            else {
-                validItems.push(false)
-            }
-        }
-        else {
-            validItems.push(false)
-        }
+
+    //alert("caseSize:"+caseSize);
+    //alert("caseItems.length:"+caseItems.length);
+
+    for(let i = 0; i < caseItems.length; i++) {
+        //alert("i:"+i);
+        //for (let j = 0; j < caseItems[i].quantity; j++) {
+            //console.log(caseItems[i]);
+            //alert("j:"+j);
+            //alert("caseItems[i].title:"+caseItems[i].title);
+            validItems.push(true)
+            let icon = GenericRed
+            if (caseItems[i].wine_type=="White") icon = GenericWhite
+            if (caseItems[i].wine_type=="Rose") icon = GenericRose
+            if (caseItems[i].wine_type=="Sparkling") icon = GenericChampagne
+            if (caseItems[i].wine_type=="Sweet") icon = WineSweet
+            if (caseItems[i].wine_type=="Fortified") icon = WineFortified
+            if (caseItems[i].wine_type=="Orange") icon = WineOrange
+            itemIcons.push(icon)   
+        //}
+    }
+    //alert("remaining:"+(caseSize-validItems.length));
+    
+    for (let j = 0; j < (caseSize-validItems.length); j++) {
+        validItems.push(false)
     }
 
     let diagramClass = 'case-diagram case-'+caseSize;
@@ -38,7 +49,7 @@ export default({caseSize, caseItems}) => {
     return(
         <Row className={diagramClass}>
             {caseSize === 6 ? (<>
-                <img className='case-background' src={SixFrameBackground}/>
+                <img className='case-background' src={'https://howards-folly-wine.digitact.co.uk/' + SixFrameBackground}/>
                 
                 {validItems[0] && <img className='bottle-six-back' src={itemIcons[0]}/>}
                 {validItems[1] && <img className='bottle-six-midbackleft' src={itemIcons[1]}/>}
@@ -47,9 +58,9 @@ export default({caseSize, caseItems}) => {
                 {validItems[4] && <img className='bottle-six-midright' src={itemIcons[4]}/>}
                 {validItems[5] && <img className='bottle-six-front' src={itemIcons[5]}/>}
 
-                <img className='case-foreground' src={SixFrameForeground}/> 
+                <img className='case-foreground' src={'https://howards-folly-wine.digitact.co.uk/' + SixFrameForeground}/> 
             </>) : (<>
-                <img className='case-background' src={TwelveFrameBackground}/>
+                <img className='case-background' src={'https://howards-folly-wine.digitact.co.uk/' + TwelveFrameBackground}/>
                 
                 {validItems[0] && <img className='bottle-12-0' src={itemIcons[0]}/>}
                 {validItems[1] && <img className='bottle-12-1' src={itemIcons[1]}/>}
@@ -64,7 +75,7 @@ export default({caseSize, caseItems}) => {
                 {validItems[10] && <img className='bottle-12-10' src={itemIcons[10]}/>}
                 {validItems[11] && <img className='bottle-12-11' src={itemIcons[11]}/>}
 
-                <img className='case-foreground' src={TwelveFrameForeground}/> 
+                <img className='case-foreground' src={'https://howards-folly-wine.digitact.co.uk/' + TwelveFrameForeground}/> 
             </>)}
         </Row>
     )

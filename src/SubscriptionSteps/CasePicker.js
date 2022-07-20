@@ -1,6 +1,7 @@
 import React, {useState} from "react";
-import { Row, Col, Button } from "react-bootstrap";
+import { Row, Col, Button, Image } from "react-bootstrap";
 import SideBySideDisplay from "../SideBySidePicker/SideBySideDisplay";
+import CompleteOrderButton from '../assets/CompleteOrderButton.svg';
 
 export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels, customRules}) => {
     const [caseCount, setCaseCount] = useState(0)
@@ -33,8 +34,8 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
                         : <p className='text-center'>You may now complete your order</p>}
                     </Row>
                     <Row className='d-flex align-items-center'>
-                        <Button onClick={(e) => finishCase(e)} disabled={caseCount!=caseSize} className='m-auto'>
-                            Complete order
+                        <Button variant="light" onClick={(e) => finishCase(e)} disabled={caseCount!=caseSize} className='m-auto'>
+                            <Image src={"https://howards-folly-wine.digitact.co.uk" + CompleteOrderButton} width="100" />
                         </Button>
                     </Row>
                 </Col>

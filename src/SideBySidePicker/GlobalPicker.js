@@ -98,17 +98,11 @@ export default({caseSize, caseItems, setCaseItems, caseCount, setCaseCount, cust
         let t = 0
         //on the first run through we want to populate the case with any defaults mandated by the vendor
         defaultWines.forEach((w, i) => {
-          wines.push(w)
-          t++
-
-          let dw = vd.find(v => w.shopify_id === v.shopify_id)
-          if(dw) {
-              dw.min++
-          }
-          else {
-              w.min = 1
-              vd.push(w)
-          }
+            for(let i = 0; i < w.quantity; i++) {
+                wines.push(w)
+            }          
+          vd.push(w)
+          t += parseInt(w.quantity)
         })
         setCaseItems(wines)
         _setTotalItems(t)
@@ -119,24 +113,8 @@ export default({caseSize, caseItems, setCaseItems, caseCount, setCaseCount, cust
         <div>
             <Row className='my-2'>
                 <Col>
-                <input className='d-inline search-minimal' placeholder={placeholder}></input>
-                <Button className='d-inline button-minimal'>{searchCTA}</Button>
-                </Col>
-            </Row>
-            <Row className='my-2'>
-                <Col>
-                    <Dropdown>
-                        <Dropdown.Toggle className='dropdown-minimal'>{sort}</Dropdown.Toggle>
-                    </Dropdown>
-                </Col>
-                <Col>
-                    <Dropdown>
-                        <Dropdown.Toggle className='dropdown-minimal'>{filter}</Dropdown.Toggle>
-                    </Dropdown>
-                </Col>
-                <Col>
                 <h3>
-                    {totalItems}/{caseSize}
+                    Selected: {totalItems}/{caseSize}
                 </h3>
                 </Col>
             </Row>
@@ -182,7 +160,7 @@ export default({caseSize, caseItems, setCaseItems, caseCount, setCaseCount, cust
                             return(
                                 
                                 <Col md={6} className={classname}>
-                                    <CaseItem item={o} caseSize={caseSize} totalItems={totalItems} setTotalItems={_setTotalItems} caseItems={caseItems} setCaseItems={setCaseItems} bgClass={theme}/>
+                                    <CaseItem defaultQuantity={o.quantity} item={o} caseSize={caseSize} totalItems={totalItems} setTotalItems={_setTotalItems} caseItems={caseItems} setCaseItems={setCaseItems} bgClass={theme}/>
                                 </Col>
                                 
                         )})

@@ -1,7 +1,8 @@
 import React from "react";
-import { Button} from "react-bootstrap";
+import { Button, Image, Row, Col} from "react-bootstrap";
+import FinishButton from '../assets/FinishButton.svg';
 
-export default({selectedProduct, selectedSellingPlan}) => {
+export default({selectedProduct, selectedSellingPlan, stepLabels, selectedProductImage}) => {
 
     const addToShopify = (e) => {
         e.preventDefault()
@@ -43,17 +44,33 @@ export default({selectedProduct, selectedSellingPlan}) => {
         });
 
     }
+
+    //<p>Product: {selectedProduct}</p>
+    //<p>Selling Plan: {selectedSellingPlan}</p>
   
     return (
         <div>
-        <h3>
-            Your subscription is ready.
-        </h3>
-        <p>Product: {selectedProduct}</p>
-        <p>Selling Plan: {selectedSellingPlan}</p>
-        <Button onClick={(e) => addToShopify(e)}>
-            Add To Cart
-        </Button>
+            <h3>
+                Your subscription is ready.
+            </h3>
+            <div class="my-4">
+                <Row>
+                    <Col sm={3} md={3} lg={3}>
+                    <img src={selectedProductImage} class="w-100" />
+                    </Col>
+                    <Col>
+                    {stepLabels && stepLabels.map((o) => {
+                        return(
+                            <p><b>{o.key}</b>{o.name}</p>
+                        )
+                    })
+                    }
+                    <Button variant="light" onClick={(e) => addToShopify(e)}>
+                        <Image src={"https://howards-folly-wine.digitact.co.uk" + FinishButton} width="100" />
+                    </Button>
+                    </Col>
+                </Row>
+            </div>        
         </div>
     )
 }
