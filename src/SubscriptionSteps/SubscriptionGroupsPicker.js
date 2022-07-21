@@ -3,7 +3,7 @@ import { Button, Row, Col, Image } from "react-bootstrap";
 import WineList from './WineList'
 import SelectButton from '../assets/SelectButton.svg';
 
-export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels, setSelectedProduct, showCustomiseStep, setCustomRules, setSelectedProductImage}) => {
+export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels, selectedProduct, setSelectedProduct, showCustomiseStep, setCustomRules, setSelectedProductImage, setCaseItems}) => {
     let prodCols = []
     const products = stepData[currentStep]
 
@@ -11,8 +11,12 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
         if (e !== null) e.preventDefault()
 
         let sl = stepLabels
-        sl[currentStep] = {key:'Your product: ', name:o.product_title} //+', '+o.variant_title
+        sl[currentStep] = {key:'Your product: ', name:o.product_title} //+', '+o.variant_title        
         setStepLabels(sl)
+        if (selectedProduct!=o.shopify_id) {
+            //reset case if changing product
+            setCaseItems([]);
+        }
         setSelectedProduct(o.shopify_id)
         setSelectedProductImage(o.image)
         if (typeof(o.custom_case) !== 'undefined' && o.custom_case != null) {

@@ -3,8 +3,8 @@ import {Row, Col} from 'react-bootstrap';
 import GlobalPicker from './GlobalPicker';
 import CaseDiagram from './CaseDiagram';
 
-export default ({caseSize = 6, caseCount, setCaseCount, customRules}) => {
-    const [caseItems, setCaseItems] = useState([])
+export default ({caseSize = 6, caseCount, setCaseCount, customRules, caseItems, setCaseItems}) => {
+    
 
     return (
         <div className='mx-xl-5 mb-5 px-xl-5 pb-5'>

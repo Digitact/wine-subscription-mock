@@ -2,16 +2,33 @@ import React from "react";
 import { Button, Image, Row, Col} from "react-bootstrap";
 import FinishButton from '../assets/FinishButton.svg';
 
-export default({selectedProduct, selectedSellingPlan, stepLabels, selectedProductImage}) => {
+export default({selectedProduct, selectedSellingPlan, stepLabels, selectedProductImage, caseItems}) => {
+
+    var properties = {};
+    var totals = {};
+    let c = [...caseItems];    
+    for(let i = 0; i < c.length; i++) {
+        if(totals[c[i].title]===undefined) totals[c[i].title] = 1;
+        else totals[c[i].title] = totals[c[i].title]+1;
+    }
+    console.log(totals);
+    var counter = 1;
+    Object.keys(totals).forEach(key => {
+        properties["Wine "+counter] = totals[key]+" x "+key;
+        counter++; 
+    });
+    console.log(properties);
+    console.log(caseItems);
 
     const addToShopify = (e) => {
         e.preventDefault()
-
+       
         let formData = {
             'items': [{
                 'id': selectedProduct,
                 'quantity': 1,
                 'selling_plan': selectedSellingPlan,
+                'properties': properties
             }]
         };
         //alert(formData)
@@ -64,7 +81,12 @@ export default({selectedProduct, selectedSellingPlan, stepLabels, selectedProduc
                             <p><b>{o.key}</b>{o.name}</p>
                         )
                     })
-                    }
+                    } 
+                    {Object.values(properties).map((value, index) => {
+                        return (
+                        <p>{value}</p>
+                        );
+                    })}              
                     <Button variant="light" onClick={(e) => addToShopify(e)}>
                         <Image src={"https://wineclub-demo.digitact.co.uk" + FinishButton} width="100" />
                     </Button>

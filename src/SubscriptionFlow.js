@@ -57,6 +57,7 @@ export default ({step}) => {
     const [selectedProductImage, setSelectedProductImage] = useState("")
     const [selectedSellingPlan, setSelectedSellingPlan] = useState("")
     const [customRules, setCustomRules] = useState([])
+    const [caseItems, setCaseItems] = useState([])
     
     const clubsEndpoint = "https://wineclub-demo.digitact.co.uk/app/api/wineclubs/"
     const prodsEndpoint = "https://wineclub-demo.digitact.co.uk/app/api/wineclubproducts/"
@@ -168,6 +169,8 @@ export default ({step}) => {
                         showCustomiseStep={showCustomiseStep}
                         customRules={customRules}
                         setCustomRules={setCustomRules}
+                        caseItems={caseItems}
+                        setCaseItems={setCaseItems}
                     />
                 </Col>
             </Row>

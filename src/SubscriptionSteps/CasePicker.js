@@ -3,7 +3,7 @@ import { Row, Col, Button, Image } from "react-bootstrap";
 import SideBySideDisplay from "../SideBySidePicker/SideBySideDisplay";
 import CompleteOrderButton from '../assets/CompleteOrderButton.svg';
 
-export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels, customRules}) => {
+export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels, customRules, caseItems, setCaseItems}) => {
     const [caseCount, setCaseCount] = useState(0)
     
     let caseSize = 12
@@ -43,7 +43,7 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
             </Row>
 
           <Row>
-              <SideBySideDisplay caseSize={caseSize} caseCount={caseCount} setCaseCount={setCaseCount} customRules={customRules}/>
+              <SideBySideDisplay caseSize={caseSize} caseCount={caseCount} setCaseCount={setCaseCount} customRules={customRules} caseItems={caseItems} setCaseItems={setCaseItems} />
           </Row>
       </div>  
     )
