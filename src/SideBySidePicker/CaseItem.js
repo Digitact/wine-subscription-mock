@@ -38,12 +38,12 @@ export default({defaultQuantity, item, caseSize, totalItems, setTotalItems, case
         if (q > 0 && q > o.min) {
           let c = [...caseItems];
           let ind = -1
-          console.log("o.min:"+o.min);
-          console.log("o.shopify_id:"+o.shopify_id);
-          console.log(o);
+          //console.log("o.min:"+o.min);
+          //console.log("o.shopify_id:"+o.shopify_id);
+          //console.log(o);
           for(let i = 0; i < c.length; i++) {
-            console.log("c[i].shopify_id:"+c[i].shopify_id+" o.shopify_id:"+o.shopify_id);
-            console.log(c);
+            //console.log("c[i].shopify_id:"+c[i].shopify_id+" o.shopify_id:"+o.shopify_id);
+            //console.log(c);
             if(c[i].shopify_id === o.shopify_id) {
               ind = i;
               break;
