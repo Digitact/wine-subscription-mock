@@ -96,7 +96,7 @@ export default({defaultQuantity, item, caseSize, totalItems, setTotalItems, case
                 </Col>
             </Row>
             <Row>
-                <p className='text-center'>{item.vintage} {item.title}</p>
+                <p className='text-center'>{item.title}</p>
             </Row>
             <Row>
               <Col>
