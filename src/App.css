@@ -29,12 +29,24 @@ h3 {
   color: #e8b870;
 }
 
+.button-minimal:hover {
+  background-color: #e8b870;
+  color: #fff;
+  border-color: #fff;
+}
+
 .dropdown-minimal {
   background-color: #ffffff;
   border-radius: 0px;
   border-width:2px;
   color: #0e1f3c;
   border-color: #0e1f3c;
+}
+
+.dropdown-minimal:hover {
+  background-color:#0e1f3c;
+  color: #ffffff;
+  border-color: #fff;
 }
 
 .circle-button-bg {

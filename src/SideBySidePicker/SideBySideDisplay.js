@@ -3,7 +3,7 @@ import {Row, Col} from 'react-bootstrap';
 import GlobalPicker from './GlobalPicker';
 import CaseDiagram from './CaseDiagram';
 
-export default ({caseSize = 6, caseCount, setCaseCount, customRules}) => {
+export default ({caseSize = 12, caseCount, setCaseCount, customRules}) => {
     const [caseItems, setCaseItems] = useState([])
 
     return (

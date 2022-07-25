@@ -46,10 +46,13 @@ export default({caseSize, caseItems}) => {
 
     let diagramClass = 'case-diagram case-'+caseSize;
     
+    const assetUrl_old = 'https://howards-folly-wine.digitact.co.uk/'
+    const assetUrl = 'https://wineclub-demo.digitact.co.uk/case-builder'
+
     return(
         <Row className={diagramClass}>
             {caseSize === 6 ? (<>
-                <img className='case-background' src={'https://howards-folly-wine.digitact.co.uk/' + SixFrameBackground}/>
+                <img className='case-background' src={assetUrl + SixFrameBackground}/>
                 
                 {validItems[0] && <img className='bottle-six-back' src={itemIcons[0]}/>}
                 {validItems[1] && <img className='bottle-six-midbackleft' src={itemIcons[1]}/>}
@@ -58,9 +61,9 @@ export default({caseSize, caseItems}) => {
                 {validItems[4] && <img className='bottle-six-midright' src={itemIcons[4]}/>}
                 {validItems[5] && <img className='bottle-six-front' src={itemIcons[5]}/>}
 
-                <img className='case-foreground' src={'https://howards-folly-wine.digitact.co.uk/' + SixFrameForeground}/> 
+                <img className='case-foreground' src={assetUrl + SixFrameForeground}/> 
             </>) : (<>
-                <img className='case-background' src={'https://howards-folly-wine.digitact.co.uk/' + TwelveFrameBackground}/>
+                <img className='case-background' src={assetUrl + TwelveFrameBackground}/>
                 
                 {validItems[0] && <img className='bottle-12-0' src={itemIcons[0]}/>}
                 {validItems[1] && <img className='bottle-12-1' src={itemIcons[1]}/>}
@@ -75,7 +78,7 @@ export default({caseSize, caseItems}) => {
                 {validItems[10] && <img className='bottle-12-10' src={itemIcons[10]}/>}
                 {validItems[11] && <img className='bottle-12-11' src={itemIcons[11]}/>}
 
-                <img className='case-foreground' src={'https://howards-folly-wine.digitact.co.uk/' + TwelveFrameForeground}/> 
+                <img className='case-foreground' src={assetUrl + TwelveFrameForeground}/> 
             </>)}
         </Row>
     )
