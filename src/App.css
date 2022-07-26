@@ -1,3 +1,10 @@
+:root {
+  --case-drop-height: 125px;
+  --case-offset: 200px;
+  --case-shadow-height: 8px;
+  --case-size: 356px;
+}
+
 p {
   text-align: left;
 }
@@ -162,6 +169,84 @@ h3 {
 
 .input-button {
   height: 40px;
+}
+
+.horizontal-list {
+  display: inline-block;
+}
+
+.horizontal-list-item {
+  float:left;
+  display:inline;
+}
+
+.selector-left-enabled {
+  background-color: #049b65;
+  color: #000000;
+  border: 2px solid #049b65;
+  border-radius: 10px 0px 0px 10px;
+  width:75px;
+  float:right;
+}
+
+.selector-left-disabled {
+  background-color: #cccccc;
+  color: #333333;
+  border: 2px solid #049b65;
+  border-radius: 10px 0px 0px 10px;
+  width:75px;
+  float:right;
+}
+
+.selector-right-enabled {
+  background-color: #049b65;
+  color:#000000;
+  border: 2px solid #049b65;
+  border-radius: 0px 10px 10px 0px;
+  width:75px;
+  float:left;
+}
+
+.selector-right-disabled {
+  background-color: #cccccc;
+  color: #333333;
+  border: 2px solid #049b65;
+  border-radius: 0px 10px 10px 0px;
+  width:75px;
+  float:left;
+}
+
+.display-active {
+  display:block;
+  transition: width 0.5s;
+}
+
+.display-inactive {
+  display:none;
+  padding:0px !important;
+  margin:0px !important;
+  width:0%;
+}
+
+.bounce {
+  position: absolute;
+  top: var(--case-offset);
+  left: calc(50% - var(--case-size)/2);
+  
+  animation-name: bounce; 
+  animation-duration: 0.5s;
+  animation-direction: alternate;
+  animation-timing-function: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+  animation-iteration-count: infinite;
+}
+
+@keyframes bounce {
+  from { 
+    transform: translateY(0) scale(1);
+  }
+  to   { 
+    transform: translateY(var(--case-drop-height)) scale(1, 0.8);
+  }
 }
 
 .current-step {

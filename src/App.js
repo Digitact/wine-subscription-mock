@@ -7,7 +7,7 @@ function App() {
     <div className="subscription-module">
       <header className="App-header">
         
-      <SubscriptionFlow step={0} />
+      <SubscriptionFlow step={3} />
       </header>
 
     </div>
