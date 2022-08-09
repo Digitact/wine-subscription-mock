@@ -12,14 +12,14 @@ export default ({step}) => {
     const stepsList = {
         0: 
         {
-            name: 'Choose Product',
+            name: 'Subscription',
             func: SubscriptionGroupsPicker,
             done: false,
             visible: true
         },
         1:
         {
-            name: 'Your Subscription',
+            name: 'What\'s Included',
             func: SubscriptionTypePicker,
             done: false,
             visible: true
@@ -40,7 +40,7 @@ export default ({step}) => {
         }, 
         4:        
         {
-            name: 'Finish!',
+            name: 'Confirmation',
             func: AddToCart,
             done: false,
             visible: true
@@ -143,7 +143,7 @@ export default ({step}) => {
     let StepView = steps[stepIndex].func;
 
      if(loading) {
-        return <p>Loading...</p>
+        return <div class="loading-center m-4 p-4"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
     }
 
     return (

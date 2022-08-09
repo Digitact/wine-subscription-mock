@@ -31,17 +31,18 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
 
         incrementStep(o)
     }
-
+/*
     if (products.length===1) {
         selectGroup(null,products[0]);
     }
-
+*/
     products.forEach((o) => {
         var imageUrl = o.image;
         var backgroundUrl = "url('"+imageUrl+"')";
         //'background-image':backgroundUrl,
         prodCols.push(
-        <Col className='p-5'>
+        <Col className='m-2 d-flex align-items-stretch product-button'>
+            <Button className='p-3 d-flex flex-column align-items-start' onClick={(e) => selectGroup(e, o)}>
             <div class="w-100" style={{ 'justify-content': 'center', 'align-items': 'center', 'display': 'flex', 'height':'300px' }}>
                 <img src={o.image} style={{ 'max-width':'100%', 'max-height':'100%', 'height': 'auto' }} />
             </div>
@@ -52,8 +53,7 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
                 {o.product_description}
             </p>
             <WineList wines={o.custom_case} />
-            <Button variant="light" onClick={(e) => selectGroup(e, o)}>
-                <Image src={"https://wineclub-demo.digitact.co.uk" + SelectButton} width="100" />
+            <WineList wines={o.fixed_case} />
             </Button>
         </Col>
     )})

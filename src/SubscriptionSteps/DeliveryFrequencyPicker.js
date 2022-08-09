@@ -17,11 +17,11 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
 
         incrementStep(o)
     }
-
+/*
     if (deliveryDetails.length===1) {
         selectDelivery(null,deliveryDetails[0]);
     }
-
+*/
     deliveryDetails.forEach((o) => {
         cols.push(
             <Col className='p-5'>

@@ -17,11 +17,11 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
 
         incrementStep(o)
     }
-
+/*
     if (sellingPlanGroups.length===1) {
         selectPlan(null,sellingPlanGroups[0]);
     }
-
+*/
     sellingPlanGroups.forEach((o) => {
         cols.push(
         <Col className='p-5'>

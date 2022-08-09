@@ -34,8 +34,8 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
                         : <p className='text-center'>You may now complete your order</p>}
                     </Row>
                     <Row className='d-flex align-items-center'>
-                        <Button variant="light" onClick={(e) => finishCase(e)} disabled={caseCount!=caseSize} className='m-auto'>
-                            <Image src={"https://wineclub-demo.digitact.co.uk" + CompleteOrderButton} width="100" />
+                        <Button variant="light" onClick={(e) => finishCase(e)} disabled={caseCount!=caseSize} className='product-form__submit button button--primary m-auto'>
+                            Add to Cart
                         </Button>
                     </Row>
                 </Col>
