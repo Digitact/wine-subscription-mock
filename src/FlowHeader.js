@@ -23,14 +23,10 @@ export default({steps, currentStep, goToStep}) => {
         if (steps[i].visible) {
             rows.push(
                 <Col className={style} onClick={(e) => { e.preventDefault(); goToStep(i, done, style); } }>
-                <Row className='p-3' style={{'height':'50px'}}>
-                    <Col>
-                    <h3 className='text-dark'>
+                    <h3 style={{'height':'36px', 'font-size': '36px'}} className='text-dark'>
                     {stepnum}
+                    {style === 'complete-step' ? <><img className="mx-2"  style={{'vertical-align':'baseline'}}  src={'https://wineclub-demo.digitact.co.uk/' + Tick} width={26} height={26}/></> : null}
                     </h3>
-                    </Col>
-                    {style === 'complete-step' ? <Col xs={4}><img className='float-right' src={'https://wineclub-demo.digitact.co.uk/' + Tick} width={40} height={40}/></Col> : null}
-                </Row>
                 <p className='text-dark'>{steps[i].name}</p>
                 </Col>)    
             stepnum++;   

@@ -93,7 +93,7 @@ export default ({step}) => {
         getSubscriptions();
     }, [])
 
-    if(stepLabels.length === 0) {
+    if(stepLabels.length === 0) {       
         for(let i = 0; i < Object.keys(steps).length; i++) {
             stepData.push(null)
             stepLabels.push({key:'', name:''})
@@ -130,6 +130,11 @@ export default ({step}) => {
 
         if(stepIndex >= 0 && stepIndex < Object.keys(steps).length) {
             setStepIndex(i)
+            let sl = stepLabels
+            sl.forEach((label,j) => {
+                if (j>=i) sl[j] = {key:'', name:''}
+            })
+            setStepLabels(sl)            
         }
     }
 

@@ -76,9 +76,10 @@ export default({defaultQuantity, item, caseSize, totalItems, setTotalItems, case
           </Row>
             <Row className="m-auto">
                 <Col xxs={3} md={3} className="w-25 d-flex justify-content-end p-0">
-                    <Button
+                    <Button variant='dark'
                     className={"circle-button-bg " + bgClass}
                     onClick={(e) => decrementLocalQuantity(e, item, localQuantity)}
+                    disabled={localQuantity==item.min}
                     >
                     <b>-</b>
                     </Button>
@@ -87,9 +88,10 @@ export default({defaultQuantity, item, caseSize, totalItems, setTotalItems, case
                     <p className="text-center">{Qty}: {localQuantity}</p>
                 </Col>
                 <Col xxs={3} md={3} className="w-25 d-flex justify-content-start p-0">
-                    <Button
+                    <Button variant='dark'
                     className={"circle-button-bg " + bgClass}
                     onClick={(e) => incrementLocalQuantity(e, item, localQuantity)}
+                    disabled={totalItems==caseSize || localQuantity==item.max}
                     >
                     <b>+</b>
                     </Button>

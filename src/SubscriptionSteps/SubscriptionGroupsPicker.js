@@ -42,7 +42,7 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
         //'background-image':backgroundUrl,
         prodCols.push(
         <Col className='m-2 d-flex align-items-stretch product-button'>
-            <Button className='p-3 d-flex flex-column align-items-start' onClick={(e) => selectGroup(e, o)}>
+            <Button className='p-3 d-flex flex-column align-items-start w-100' onClick={(e) => selectGroup(e, o)}>
             <div class="w-100" style={{ 'justify-content': 'center', 'align-items': 'center', 'display': 'flex', 'height':'300px' }}>
                 <img src={o.image} style={{ 'max-width':'100%', 'max-height':'100%', 'height': 'auto' }} />
             </div>

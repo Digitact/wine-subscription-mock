@@ -22,16 +22,18 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
         selectPlan(null,sellingPlanGroups[0]);
     }
 */
+    if (sellingPlanGroups.length==1) cols.push(<Col className='m-2 d-flex align-items-stretch product-button align-self-center'></Col>);
     sellingPlanGroups.forEach((o) => {
         cols.push(
-        <Col className='p-5'>
-        <h4>{o.name}</h4>
-        <Button variant="light" onClick={(e) => selectPlan(e, o)}>
-            <Image src={"https://wineclub-demo.digitact.co.uk" + SelectButton} width="100" />
-        </Button>
+        <Col md={4} className='m-2 d-flex align-items-stretch product-button align-self-center'>
+            <Button className='p-3 d-flex flex-column align-items-start w-100' onClick={(e) => selectPlan(e, o)}>
+            <h4>{o.name}</h4>
+            <p>{o.description}</p>
+            </Button>
         </Col>
         )
     })
+    if (sellingPlanGroups.length==1) cols.push(<Col className='m-2 d-flex align-items-stretch product-button align-self-center'></Col>);
 
     return(
         <div>
@@ -44,7 +46,7 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
             }
             </Row>
 
-            <Row>
+            <Row className='justify-content-center'>
                 {cols}
             </Row>
         </div>

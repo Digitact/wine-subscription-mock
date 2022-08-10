@@ -87,8 +87,8 @@ export default({selectedProduct, selectedSellingPlan, stepLabels, selectedProduc
                         <p>{value}</p>
                         );
                     })}              
-                    <Button variant="light" onClick={(e) => addToShopify(e)}>
-                        <Image src={"https://wineclub-demo.digitact.co.uk" + FinishButton} width="100" />
+                    <Button variant="dark" className='black-button' onClick={(e) => addToShopify(e)}>
+                        Add To Cart
                     </Button>
                     </Col>
                 </Row>

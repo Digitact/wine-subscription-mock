@@ -22,21 +22,18 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
         selectDelivery(null,deliveryDetails[0]);
     }
 */
+    if (deliveryDetails.length==1) cols.push(<Col className='m-2 d-flex align-items-stretch product-button align-self-center'></Col>);
     deliveryDetails.forEach((o) => {
         cols.push(
-            <Col className='p-5'>
-                <h4>
-                    {o.name}
-                </h4>
-                <p>
-                    {o.description}
-                </p>
-                <Button variant="light" onClick={(e) => selectDelivery(e, o)}>
-                    <Image src={"https://wineclub-demo.digitact.co.uk" + SelectButton} width="100" />
-                </Button>
-            </Col>
+        <Col className='m-2 d-flex align-items-stretch product-button align-self-center'>
+            <Button className='p-3 d-flex flex-column align-items-start w-100' onClick={(e) => selectDelivery(e, o)}>
+            <h4>{o.name}</h4>
+            <p>{o.description}</p>
+            </Button>
+        </Col>
         )
     })
+    if (deliveryDetails.length==1) cols.push(<Col className='m-2 d-flex align-items-stretch product-button align-self-center'></Col>);
 
     return (
       <div>
@@ -49,7 +46,7 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
             }
         </Row>
 
-          <Row>
+          <Row className="justify-content-center">
               {cols}
           </Row>
       </div>  
