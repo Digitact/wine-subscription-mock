@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import { Button, Image, Row, Col} from "react-bootstrap";
 import FinishButton from '../assets/FinishButton.svg';
 
 export default({selectedProduct, selectedSellingPlan, stepLabels, selectedProductImage, caseItems}) => {
+    const [errorMessage, setErrorMessage] = useState("")
 
     var properties = {};
     var totals = {};
@@ -22,7 +23,8 @@ export default({selectedProduct, selectedSellingPlan, stepLabels, selectedProduc
 
     const addToShopify = (e) => {
         e.preventDefault()
-       
+        setErrorMessage("");
+
         let formData = {
             'items': [{
                 'id': selectedProduct,
@@ -45,7 +47,8 @@ export default({selectedProduct, selectedSellingPlan, stepLabels, selectedProduc
         .then((response) => response.json())
         .then((response) => {
             if (response.status) {
-                this.handleErrorMessage(response.description);
+                //this.handleErrorMessage(response.description);
+                setErrorMessage(response.description);
                 return;
             }
         
@@ -90,6 +93,7 @@ export default({selectedProduct, selectedSellingPlan, stepLabels, selectedProduc
                     <Button variant="dark" className='black-button' onClick={(e) => addToShopify(e)}>
                         Add To Cart
                     </Button>
+                    {errorMessage!=""?<div className='mt-2 alert alert-danger'>{errorMessage}</div>:<></>}                   
                     </Col>
                 </Row>
             </div>        

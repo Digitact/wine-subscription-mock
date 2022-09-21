@@ -46,22 +46,22 @@ export default({caseSize, caseItems}) => {
 
     let diagramClass = 'case-diagram case-'+caseSize;
     
-    const assetUrl = 'https://howards-folly-wine.digitact.co.uk/'
-    //const assetUrl = 'https://wineclub-demo.digitact.co.uk/'
-
     return(
         <Row className={diagramClass}>
             {caseSize === 6 ? (<>
-                <img className='case-background' src={assetUrl + SixFrameBackground}/>                
+                <img className='case-background' src={'https://wineclub-demo.digitact.co.uk/' + SixFrameBackground}/>
+                
                 {validItems[0] && <img className='bottle-six-back' src={itemIcons[0]}/>}
                 {validItems[1] && <img className='bottle-six-midbackleft' src={itemIcons[1]}/>}
                 {validItems[2] && <img className='bottle-six-midbackright' src={itemIcons[2]}/>}
                 {validItems[3] && <img className='bottle-six-midleft' src={itemIcons[3]}/>}
                 {validItems[4] && <img className='bottle-six-midright' src={itemIcons[4]}/>}
                 {validItems[5] && <img className='bottle-six-front' src={itemIcons[5]}/>}
-                <img className='case-foreground' src={assetUrl + SixFrameForeground}/> 
+
+                <img className='case-foreground' src={'https://wineclub-demo.digitact.co.uk/' + SixFrameForeground}/> 
             </>) : (<>
-                <img className='case-background' src={assetUrl + TwelveFrameBackground}/>
+                <img className='case-background' src={'https://wineclub-demo.digitact.co.uk/' + TwelveFrameBackground}/>
+                
                 {validItems[0] && <img className='bottle-12-0' src={itemIcons[0]}/>}
                 {validItems[1] && <img className='bottle-12-1' src={itemIcons[1]}/>}
                 {validItems[2] && <img className='bottle-12-2' src={itemIcons[2]}/>}
@@ -74,7 +74,8 @@ export default({caseSize, caseItems}) => {
                 {validItems[9] && <img className='bottle-12-9' src={itemIcons[9]}/>}
                 {validItems[10] && <img className='bottle-12-10' src={itemIcons[10]}/>}
                 {validItems[11] && <img className='bottle-12-11' src={itemIcons[11]}/>}
-                <img className='case-foreground' src={assetUrl + TwelveFrameForeground}/> 
+
+                <img className='case-foreground' src={'https://wineclub-demo.digitact.co.uk/' + TwelveFrameForeground}/> 
             </>)}
         </Row>
     )
