@@ -3,7 +3,7 @@ import { Row, Col, Button, Image } from "react-bootstrap";
 import SideBySideDisplay from "../SideBySidePicker/SideBySideDisplay";
 import CompleteOrderButton from '../assets/CompleteOrderButton.svg';
 
-export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels, customRules}) => {
+export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels, customRules, caseItems, setCaseItems}) => {
     const [caseCount, setCaseCount] = useState(0)
     
     let caseSize = 12
@@ -27,23 +27,19 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
             </Row>
 
             <Row>
-                <Col/>
-                <Col md={3} xxs={6}>
-                    <Row >
-                        {caseCount != caseSize ? <p className='text-center'>Please finalise your selection before continuing</p> 
-                        : <p className='text-center'>You may now complete your order</p>}
-                    </Row>
-                    <Row className='d-flex align-items-center'>
-                        <Button variant="light" onClick={(e) => finishCase(e)} disabled={caseCount!=caseSize} className='m-auto'>
-                            <Image src={"https://howards-folly-wine.digitact.co.uk" + CompleteOrderButton} width="100" />
-                        </Button>
-                    </Row>
+                <Col>
+                    {caseCount != caseSize ? <p className='text-center'>Please finalise your selection before continuing</p> 
+                    : <p className='text-center'>You may now complete your order</p>}
                 </Col>
-                <Col/>
+                <Col className='d-flex align-items-right'>
+                    <Button variant="dark" onClick={(e) => finishCase(e)} disabled={caseCount!=caseSize} className='product-form__submit button button--primary m-auto w-100 black-button'>
+                    Continue
+                    </Button>
+                </Col>
             </Row>
 
           <Row>
-              <SideBySideDisplay caseSize={caseSize} caseCount={caseCount} setCaseCount={setCaseCount} customRules={customRules}/>
+              <SideBySideDisplay caseSize={caseSize} caseCount={caseCount} setCaseCount={setCaseCount} customRules={customRules} caseItems={caseItems} setCaseItems={setCaseItems} />
           </Row>
       </div>  
     )

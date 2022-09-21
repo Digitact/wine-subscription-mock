@@ -1,8 +1,10 @@
 .subscription-module {
   margin: 0;
+  /*
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+    */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -13,4 +15,16 @@ code {
 }
 .wine_list ul {
   list-style: none;
+}
+#root .black-button {
+  font-size: 16px !important;
+  font-family: Garamond, Baskerville, Caslon, serif;
+  padding: 10px 30px !important;
+}
+#root .product-button h4 {
+  font-size: 22px !important;
+  padding: 10px !important;
+}
+#root .product-button p {
+  font-size: 16px !important;
 }

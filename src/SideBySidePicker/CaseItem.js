@@ -8,6 +8,7 @@ export default({defaultQuantity, item, caseSize, totalItems, setTotalItems, case
   const cur = Strings[Language].CaseItem;
   const Qty = cur['Quantity']
   const Limit = cur['Limit']
+  const Minimum = cur['Minimum']
   const Required = cur['Required']
 
   const incrementLocalQuantity = (e, o, q) => {
@@ -37,10 +38,12 @@ export default({defaultQuantity, item, caseSize, totalItems, setTotalItems, case
         if (q > 0 && q > o.min) {
           let c = [...caseItems];
           let ind = -1
-          //alert("o.min:"+o.min);
-          //alert("o.shopify_id:"+o.shopify_id);
+          //console.log("o.min:"+o.min);
+          //console.log("o.shopify_id:"+o.shopify_id);
+          //console.log(o);
           for(let i = 0; i < c.length; i++) {
-            //alert("c[i].shopify_id:"+c[i].shopify_id+" o.shopify_id:"+o.shopify_id);
+            //console.log("c[i].shopify_id:"+c[i].shopify_id+" o.shopify_id:"+o.shopify_id);
+            //console.log(c);
             if(c[i].shopify_id === o.shopify_id) {
               ind = i;
               break;
@@ -73,9 +76,10 @@ export default({defaultQuantity, item, caseSize, totalItems, setTotalItems, case
           </Row>
             <Row className="m-auto">
                 <Col xxs={3} md={3} className="w-25 d-flex justify-content-end p-0">
-                    <Button
+                    <Button variant='dark'
                     className={"circle-button-bg " + bgClass}
                     onClick={(e) => decrementLocalQuantity(e, item, localQuantity)}
+                    disabled={localQuantity==item.min}
                     >
                     <b>-</b>
                     </Button>
@@ -84,9 +88,10 @@ export default({defaultQuantity, item, caseSize, totalItems, setTotalItems, case
                     <p className="text-center">{Qty}: {localQuantity}</p>
                 </Col>
                 <Col xxs={3} md={3} className="w-25 d-flex justify-content-start p-0">
-                    <Button
+                    <Button variant='dark'
                     className={"circle-button-bg " + bgClass}
                     onClick={(e) => incrementLocalQuantity(e, item, localQuantity)}
+                    disabled={totalItems==caseSize || localQuantity==item.max}
                     >
                     <b>+</b>
                     </Button>
@@ -100,7 +105,10 @@ export default({defaultQuantity, item, caseSize, totalItems, setTotalItems, case
                 <p>{item.wine_type}</p>
               </Col>
               <Col>
-                <p>{Limit} {item.max}</p>
+                <p>
+                  {item.min>0 ? (<> {Minimum} {item.min}<br /></>):(<></>)}
+                  {Limit} {item.max}
+                </p>
               </Col>
             </Row>
         </Col>

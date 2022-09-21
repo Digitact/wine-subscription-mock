@@ -18,7 +18,8 @@ export default({caseSize, caseItems, setCaseItems, caseCount, setCaseCount, cust
     
     //const endpoint = "https://wineclub-demo.digitact.co.uk/app/api/subscriptionoptions/winehub-demo.myshopify.com";
     //const endpoint = "https://wineclub-demo.digitact.co.uk/app/api/casepicker/winehub-demo.myshopify.com/7770188742913"
-    const endpoint = "https://wineclub-demo.digitact.co.uk/app/api/casepicker/"
+    //const endpoint = "https://howards-folly-wine.digitact.co.uk/app/api/casepicker/"
+    const endpoint = "https://howards-folly-wine.digitact.co.uk/test/api/casebuilder"
     
     const _setTotalItems = (i) => {
         setTotalItems(i)

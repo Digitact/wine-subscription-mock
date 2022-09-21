@@ -208,7 +208,8 @@ export const Strings = {
     CaseItem: {
       Quantity: 'Qty',
       Required: 'Required',
-      Limit: 'Limit of'
+      Limit: 'Limit of',
+      Minimum: 'Minimum of'
     }
   },
 };

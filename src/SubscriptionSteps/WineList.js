@@ -7,7 +7,7 @@ export default({wines}) => {
             <ul>
             {wines && wines.map((o) => {
                 return(
-                    <li><p>{o.quantity} x {o.vintage} {o.title}</p></li>
+                    <li><p>{o.quantity} x {o.title}</p></li>
                 )
             })
             }

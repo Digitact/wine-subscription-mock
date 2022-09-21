@@ -12,14 +12,14 @@ export default ({step}) => {
     const stepsList = {
         0: 
         {
-            name: 'Choose Product',
+            name: 'Subscription',
             func: SubscriptionGroupsPicker,
             done: false,
             visible: true
         },
         1:
         {
-            name: 'Your Subscription',
+            name: 'What\'s Included',
             func: SubscriptionTypePicker,
             done: false,
             visible: true
@@ -40,7 +40,7 @@ export default ({step}) => {
         }, 
         4:        
         {
-            name: 'Finish!',
+            name: 'Confirmation',
             func: AddToCart,
             done: false,
             visible: true
@@ -57,10 +57,11 @@ export default ({step}) => {
     const [selectedProductImage, setSelectedProductImage] = useState("")
     const [selectedSellingPlan, setSelectedSellingPlan] = useState("")
     const [customRules, setCustomRules] = useState([])
+    const [caseItems, setCaseItems] = useState([])
     
-    const clubsEndpoint = "https://howards-folly-wine.digitact.co.uk/app/api/wineclubs/"
-    const prodsEndpoint = "https://howards-folly-wine.digitact.co.uk/app/api/wineclubproducts/"
-    const subEndpoint = "https://howards-folly-wine.digitact.co.uk/app/api/subscriptionoptions/"
+    const clubsEndpoint = "https://wineclub-demo.digitact.co.uk/app/api/wineclubs/"
+    const prodsEndpoint = "https://wineclub-demo.digitact.co.uk/app/api/wineclubproducts/"
+    const subEndpoint = "https://wineclub-demo.digitact.co.uk/app/api/subscriptionoptions/"
 
     const currencyCode = "gbp"
     
@@ -92,7 +93,7 @@ export default ({step}) => {
         getSubscriptions();
     }, [])
 
-    if(stepLabels.length === 0) {
+    if(stepLabels.length === 0) {       
         for(let i = 0; i < Object.keys(steps).length; i++) {
             stepData.push(null)
             stepLabels.push({key:'', name:''})
@@ -129,6 +130,11 @@ export default ({step}) => {
 
         if(stepIndex >= 0 && stepIndex < Object.keys(steps).length) {
             setStepIndex(i)
+            let sl = stepLabels
+            sl.forEach((label,j) => {
+                if (j>=i) sl[j] = {key:'', name:''}
+            })
+            setStepLabels(sl)            
         }
     }
 
@@ -142,7 +148,7 @@ export default ({step}) => {
     let StepView = steps[stepIndex].func;
 
      if(loading) {
-        return <p>Loading...</p>
+        return <div class="loading-center m-4 p-4"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
     }
 
     return (
@@ -168,6 +174,8 @@ export default ({step}) => {
                         showCustomiseStep={showCustomiseStep}
                         customRules={customRules}
                         setCustomRules={setCustomRules}
+                        caseItems={caseItems}
+                        setCaseItems={setCaseItems}
                     />
                 </Col>
             </Row>

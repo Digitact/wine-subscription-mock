@@ -5,11 +5,14 @@ import Tick from "./assets/tick.png"
 export default({steps, currentStep, goToStep}) => {
     let rows = []
 
+    let stepnum = 1;
+
     for(let i = 0; i < Object.keys(steps).length; i++) {
         let done = steps[i].done
         let style = 'complete-step'
 
-        if(done === false) {
+        //if(done === false) {
+        if(currentStep < i) {
             style='incomplete-step'
         }
 
@@ -20,16 +23,13 @@ export default({steps, currentStep, goToStep}) => {
         if (steps[i].visible) {
             rows.push(
                 <Col className={style} onClick={(e) => { e.preventDefault(); goToStep(i, done, style); } }>
-                <Row className='p-3'>
-                    <Col>
-                    <h3 className='text-dark'>
-                    {i+1}
+                    <h3 style={{'height':'36px', 'font-size': '36px'}} className='text-dark'>
+                    {stepnum}
+                    {style === 'complete-step' ? <><img className="mx-2"  style={{'vertical-align':'baseline'}}  src={'https://wineclub-demo.digitact.co.uk/' + Tick} width={26} height={26}/></> : null}
                     </h3>
-                    </Col>
-                    {style === 'complete-step' ? <Col xs={4}><img className='float-right' src={'https://howards-folly-wine.digitact.co.uk/' + Tick} width={40} height={40}/></Col> : null}
-                </Row>
                 <p className='text-dark'>{steps[i].name}</p>
-                </Col>)       
+                </Col>)    
+            stepnum++;   
         }
     }
 
