@@ -33,8 +33,14 @@ h3 {
   background-color: #ffffff;
   border-radius: 0px;
   border-width:2px;
-  color: #0e1f3c;
-  border-color: #0e1f3c;
+  color: #212529;
+  border-color: #212529;
+}
+
+.dropdown-minimal:hover {
+  background-color:#212529;
+  color: #ffffff;
+  border-color: #fff;
 }
 
 .square-150 {

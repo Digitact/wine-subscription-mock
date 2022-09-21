@@ -3,13 +3,12 @@ import {Button, Row, Col, Dropdown} from 'react-bootstrap';
 import {Strings, Language} from '../assets/Strings';
 import CaseItem from './CaseItem'
 
-export default({caseSize, caseItems, setCaseItems, caseCount, setCaseCount, customRules}) => {
+export default({caseSize, caseItems, setCaseItems, caseCount, setCaseCount, customRules, setCustomRules, filteredStock, setFilteredStock}) => {
     const [loading, setLoading] = useState(true)
     const [totalItems, setTotalItems] = useState(0)
     const [defaultWines, setDefaultWines] = useState([])
     const [viewDefaults, setViewDefaults] = useState([])
     const [firstRun, setFirstRun] = useState(true)
-    const [stock, setStock] = useState([])
       
     const _setTotalItems = (i) => {
         setTotalItems(i)
@@ -19,7 +18,8 @@ export default({caseSize, caseItems, setCaseItems, caseCount, setCaseCount, cust
     useEffect(() => {
         async function fillStock() {
             setDefaultWines(customRules);
-            setStock(customRules);
+            setCustomRules(customRules);
+            setFilteredStock(customRules);
             setLoading(false);
         }
 
@@ -79,7 +79,7 @@ export default({caseSize, caseItems, setCaseItems, caseCount, setCaseCount, cust
             </Row>
             <Row className='scrollable m-0'>
                 <Row>
-                    { stock.length && stock.map((o, i) => {
+                    { filteredStock && filteredStock.length ? filteredStock.map((o, i) => {
 
                         if(i !== 0 && (i-1) % 2 == 0) {
                             switchTheme()
@@ -94,6 +94,8 @@ export default({caseSize, caseItems, setCaseItems, caseCount, setCaseCount, cust
                             </Col>
                             
                         )})
+                        :
+                        <p>No items match your filter and search conditions</p>
                     }                    
                 </Row>
             </Row>

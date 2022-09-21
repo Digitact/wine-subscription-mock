@@ -191,10 +191,21 @@ export const Strings = {
     GlobalPicker: {
       SearchPlaceholder: 'wine type/year',
       SearchCTA: 'SEARCH',
+      ClearCTA: 'CLEAR',
       SearchSort: 'Sort by',
       SearchFilter: 'Filter',
+      SearchYear: 'Year',
+      SearchType: 'Type',
+      SearchNotInCase: 'Not in my case',
+      SearchPrice: 'Price',
+      SearchAscending: 'ascending',
+      SearchDescending: 'descending',
+      SearchCurrentFilters:'Current filters:',
       Default: 'Case defaults',
       Stock: 'Selections from stock',
+      CaseFull: 'Case full',
+      AddAnother: 'Add another case!',
+      AddToCart: 'Add to cart',
     },
 
     CaseItem: {
