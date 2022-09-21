@@ -60,9 +60,7 @@ export default ({step}) => {
     const [caseItems, setCaseItems] = useState([])
     const [caseSize, setCaseSize] = useState(12)
     
-    const clubsEndpoint = "https://wineclub-demo.digitact.co.uk/app/api/wineclubs/"
-    const prodsEndpoint = "https://wineclub-demo.digitact.co.uk/app/api/wineclubproducts/"
-    const subEndpoint = "https://wineclub-demo.digitact.co.uk/app/api/subscriptionoptions/"
+    const subEndpoint = window.asset_url+"app/api/subscriptionoptions/"
 
     const currencyCode = "gbp"
     
@@ -149,7 +147,7 @@ export default ({step}) => {
     let StepView = steps[stepIndex].func;
 
      if(loading) {
-        return <div class="loading-center m-4 p-4"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
+        return <div className='loading-center m-4 p-4'><div className='lds-ring'><div></div><div></div><div></div><div></div></div></div>
     }
 
     return (

@@ -25,7 +25,7 @@ export default({steps, currentStep, goToStep}) => {
                 <Col className={style} onClick={(e) => { e.preventDefault(); goToStep(i, done, style); } }>
                     <h3 style={{'height':'36px', 'font-size': '36px'}} className='text-dark'>
                     {stepnum}
-                    {style === 'complete-step' ? <><img className="mx-2"  style={{'vertical-align':'baseline'}}  src={'https://wineclub-demo.digitact.co.uk/' + Tick} width={26} height={26}/></> : null}
+                    {style === 'complete-step' ? <><img className="mx-2"  style={{'vertical-align':'baseline'}}  src={window.asset_url + Tick} width={26} height={26}/></> : null}
                     </h3>
                 <p className='text-dark'>{steps[i].name}</p>
                 </Col>)    

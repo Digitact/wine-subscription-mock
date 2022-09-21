@@ -10,55 +10,14 @@ export default({caseSize, caseItems, setCaseItems, caseCount, setCaseCount, cust
     const [viewDefaults, setViewDefaults] = useState([])
     const [firstRun, setFirstRun] = useState(true)
     const [stock, setStock] = useState([])
-    
-    const endpoint = "https://wineclub-demo.digitact.co.uk/test/api/casebuilder";
-    
+      
     const _setTotalItems = (i) => {
         setTotalItems(i)
         setCaseCount(i)
     }
 
-    let apiArgs = () => {
-        let str=''
-        caseItems.forEach((w, i) => {
-        if(w && w.shopify_id) {
-            if(i === 0) str += '?'
-            else str += '&'
-            
-            str += 'selected[]='+w.shopify_id
-        }
-        })
-        return str
-    };
-
     useEffect(() => {
         async function fillStock() {
-        /*
-            const fullPath = endpoint+apiArgs()
-        
-            fetch(fullPath)
-            .then((response) => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw response;
-            })
-            .then((data) => {
-                setDefaultWines(data.default);
-
-                defaultWines.forEach((dw, i) => {
-                    
-                })
-
-                setStock(data.products);
-            })
-            .catch((error) => {
-                console.error(error);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-            */
             setDefaultWines(customRules);
             setStock(customRules);
             setLoading(false);
@@ -118,54 +77,24 @@ export default({caseSize, caseItems, setCaseItems, caseCount, setCaseCount, cust
                 </h3>
                 </Col>
             </Row>
-            {/*<Row className='scrollable m-0'>
-            <Row>
-                <h4>
-                 {DefaultsString}
-                </h4>
-                        { viewDefaults.length && viewDefaults.map((o, i) => {
-                            //const [localQuantity, setLocalQuantity] = useState(0)
-
-                            if(i !== 0 && (i-1) % 2 == 0) {
-                                switchTheme()
-                            }
-
-                            let classname = 'm-0 d-block ' + theme
-
-                            return(
-                                
-                                <Col md={6} className={classname}>
-                                    <CaseItem defaultItem={true} item={o} caseSize={caseSize} totalItems={totalItems} setTotalItems={setTotalItems} caseItems={caseItems} setCaseItems={setCaseItems} bgClass={theme}/>
-                                </Col>
-                                
-                        )})
-                            }
-                    
-                </Row>
-                        </Row>*/}
             <Row className='scrollable m-0'>
-                {/*<h4>
-                    {StockString}
-                    </h4>*/}
                 <Row>
-                        { stock.length && stock.map((o, i) => {
-                            //const [localQuantity, setLocalQuantity] = useState(0)
+                    { stock.length && stock.map((o, i) => {
 
-                            if(i !== 0 && (i-1) % 2 == 0) {
-                                switchTheme()
-                            }
+                        if(i !== 0 && (i-1) % 2 == 0) {
+                            switchTheme()
+                        }
 
-                            let classname = 'm-0 d-block ' + theme
+                        let classname = 'm-0 d-block ' + theme
 
-                            return(
-                                
-                                <Col md={6} className={classname}>
-                                    <CaseItem defaultQuantity={o.quantity} item={o} caseSize={caseSize} totalItems={totalItems} setTotalItems={_setTotalItems} caseItems={caseItems} setCaseItems={setCaseItems} bgClass={theme}/>
-                                </Col>
-                                
+                        return(
+                            
+                            <Col md={6} className={classname}>
+                                <CaseItem defaultQuantity={o.quantity} item={o} caseSize={caseSize} totalItems={totalItems} setTotalItems={_setTotalItems} caseItems={caseItems} setCaseItems={setCaseItems} bgClass={theme}/>
+                            </Col>
+                            
                         )})
-                            }
-                    
+                    }                    
                 </Row>
             </Row>
         </div>
