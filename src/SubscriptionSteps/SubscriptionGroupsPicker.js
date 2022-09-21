@@ -3,7 +3,7 @@ import { Button, Row, Col, Image } from "react-bootstrap";
 import WineList from './WineList'
 import SelectButton from '../assets/SelectButton.svg';
 
-export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels, selectedProduct, setSelectedProduct, showCustomiseStep, setCustomRules, setSelectedProductImage, setCaseItems}) => {
+export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels, selectedProduct, setSelectedProduct, showCustomiseStep, setCustomRules, setSelectedProductImage, setCaseItems, caseSize, setCaseSize}) => {
     let prodCols = []
     const products = stepData[currentStep]
 
@@ -19,9 +19,18 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
         }
         setSelectedProduct(o.shopify_id)
         setSelectedProductImage(o.image)
-        if (typeof(o.custom_case) !== 'undefined' && o.custom_case != null) {
-            showCustomiseStep(true)
-            setCustomRules(o.custom_case)
+        if (typeof(o.product_case) !== 'undefined' && o.product_case != null) {
+            if (typeof(o.product_case.case_type) !== 'undefined' && o.product_case.case_type != null) {
+                if (o.product_case.case_type == 'Custom' && (typeof(o.product_case.product_case_wines) !== 'undefined' && o.product_case.product_case_wines != null)) {
+                    showCustomiseStep(true);
+                    setCustomRules(o.product_case.product_case_wines);
+                } else {
+                    showCustomiseStep(false);
+                }
+            }
+            if (typeof(o.product_case.case_size) !== 'undefined' && o.product_case.case_size != null) {
+                setCaseSize(o.product_case.case_size);
+            }
         }
         else {
             showCustomiseStep(false)
@@ -52,8 +61,7 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
             <p class="case_description">
                 {o.product_description}
             </p>
-            <WineList wines={o.custom_case} />
-            <WineList wines={o.fixed_case} />
+            <WineList wines={o.product_case.product_case_wines} />
             </Button>
         </Col>
     )})

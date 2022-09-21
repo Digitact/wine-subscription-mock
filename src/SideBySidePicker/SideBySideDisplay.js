@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {Row, Col, Button} from 'react-bootstrap';
+import {Row, Col} from 'react-bootstrap';
 import GlobalPicker from './GlobalPicker';
 import CaseDiagram from './CaseDiagram';
-import SixFrame from '../assets/SixFrame.png'
 
-export default ({caseSize = 6, caseCount, setCaseCount, customRules, caseItems, setCaseItems}) => {
+export default ({caseSize, caseCount, setCaseCount, customRules, caseItems, setCaseItems}) => {
     
 
     return (
