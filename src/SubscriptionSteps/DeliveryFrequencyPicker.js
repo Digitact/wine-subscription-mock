@@ -16,11 +16,12 @@ const DeliveryFrequencyPicker = ({currentStep, stepData, incrementStep, stepLabe
 
         incrementStep(o)
     }
-/*
+
     if (deliveryDetails.length===1) {
+        //skip if only 1 option
         selectDelivery(null,deliveryDetails[0]);
     }
-*/
+    
     if (deliveryDetails.length===1) cols.push(<Col className='m-2 d-flex align-items-stretch product-button align-self-center'></Col>);
     deliveryDetails.forEach((o) => {
         cols.push(

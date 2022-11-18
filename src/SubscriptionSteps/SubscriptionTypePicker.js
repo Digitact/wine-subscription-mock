@@ -13,6 +13,12 @@ const SubscriptionTypePicker = ({currentStep, stepData, incrementStep, stepLabel
         setStepLabels(sl)
         incrementStep(o)
     }
+    
+    if (sellingPlanGroups.length===1) {
+        //skip if only 1 option
+        selectPlan(null,sellingPlanGroups[0]);
+    }
+
     if (sellingPlanGroups.length===1) cols.push(<Col className='m-2 d-flex align-items-stretch product-button align-self-center'></Col>);
     sellingPlanGroups.forEach((o) => {
         cols.push(
