@@ -7,7 +7,7 @@ import DeliveryFrequencyPicker from './SubscriptionSteps/DeliveryFrequencyPicker
 import CasePicker from './SubscriptionSteps/CasePicker';
 import AddToCart from './SubscriptionSteps/AddToCart';
 
-export default ({step}) => {
+const SubscriptionFlow = ({step}) => {
 
     const stepsList = {
         0: 
@@ -52,21 +52,16 @@ export default ({step}) => {
     const [stepData, setStepData] = useState([])
     const [stepLabels, setStepLabels] = useState([])
     const [loading, setLoading] = useState(true)
-    const [jsonData, setJsonData] = useState(null)
     const [selectedProduct, setSelectedProduct] = useState("")
     const [selectedProductImage, setSelectedProductImage] = useState("")
     const [selectedSellingPlan, setSelectedSellingPlan] = useState("")
     const [customRules, setCustomRules] = useState([])
     const [caseItems, setCaseItems] = useState([])
     const [caseSize, setCaseSize] = useState(12)
-    
-    const subEndpoint = window.asset_url+"app/api/subscriptionoptions/"
-
-    const currencyCode = "gbp"
-    
+     
     useEffect(() => {
         async function getSubscriptions() {
-            const fullPath = subEndpoint+window.permanent_domain
+            const fullPath = window.asset_url+"app/api/subscriptionoptions/"+window.permanent_domain
 
             fetch(fullPath)
             .then((response) => {
@@ -76,7 +71,6 @@ export default ({step}) => {
                 throw response;
             })
             .then((data) => {
-                setJsonData(data)
                 let sd = []
                 sd.push(data.products)
                 setStepData(sd)
@@ -183,3 +177,5 @@ export default ({step}) => {
         </Container>
     )
 }
+
+export default SubscriptionFlow;

@@ -1,7 +1,6 @@
 import React from "react";
-import { Row, Col, Button } from "react-bootstrap";
 
-export default({wines}) => {
+const WineList = ({wines}) => {
     return(
         <div class="wine_list">
             <ul>
@@ -15,3 +14,5 @@ export default({wines}) => {
         </div>
     )
 }
+
+export default WineList;

@@ -1,13 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {Button, Row, Col, Dropdown} from 'react-bootstrap';
-import {Strings, Language} from '../assets/Strings';
+import {Row, Col} from 'react-bootstrap';
 import CaseItem from './CaseItem'
 
-export default({caseSize, caseItems, setCaseItems, caseCount, setCaseCount, customRules}) => {
+const GlobalPicker = ({caseSize, caseItems, setCaseItems, caseCount, setCaseCount, customRules}) => {
     const [loading, setLoading] = useState(true)
     const [totalItems, setTotalItems] = useState(0)
     const [defaultWines, setDefaultWines] = useState([])
-    const [viewDefaults, setViewDefaults] = useState([])
     const [firstRun, setFirstRun] = useState(true)
     const [stock, setStock] = useState([])
       
@@ -16,7 +14,7 @@ export default({caseSize, caseItems, setCaseItems, caseCount, setCaseCount, cust
         setCaseCount(i)
     }
 
-    useEffect(() => {
+    useEffect((customRules) => {
         async function fillStock() {
             setDefaultWines(customRules);
             setStock(customRules);
@@ -36,14 +34,6 @@ export default({caseSize, caseItems, setCaseItems, caseCount, setCaseCount, cust
             theme = 'case-item-light'
         }
     }
-
-    const cur = Strings[Language].GlobalPicker
-    const placeholder = cur['SearchPlaceholder']
-    const searchCTA = cur['SearchCTA']
-    const sort = cur['SearchSort']
-    const filter = cur['SearchFilter']
-    const DefaultsString = cur['Default']
-    const StockString = cur['Stock']
 
     if (loading) {
         return <p>Loading casepicker...</p>
@@ -65,7 +55,6 @@ export default({caseSize, caseItems, setCaseItems, caseCount, setCaseCount, cust
         })
         setCaseItems(wines)
         _setTotalItems(t)
-        setViewDefaults(vd)
     }
 
     return(
@@ -81,7 +70,7 @@ export default({caseSize, caseItems, setCaseItems, caseCount, setCaseCount, cust
                 <Row>
                     { stock.length && stock.map((o, i) => {
 
-                        if(i !== 0 && (i-1) % 2 == 0) {
+                        if(i !== 0 && (i-1) % 2 === 0) {
                             switchTheme()
                         }
 
@@ -100,3 +89,5 @@ export default({caseSize, caseItems, setCaseItems, caseCount, setCaseCount, cust
         </div>
     )
 }
+
+export default GlobalPicker;

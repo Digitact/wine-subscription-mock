@@ -1,11 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {Row, Col} from 'react-bootstrap';
 import GlobalPicker from './GlobalPicker';
 import CaseDiagram from './CaseDiagram';
 
-export default ({caseSize, caseCount, setCaseCount, customRules, caseItems, setCaseItems}) => {
-    
-
+const SideBySideDisplay = ({caseSize, caseCount, setCaseCount, customRules, caseItems, setCaseItems}) => {  
     return (
         <div className='pb-5'>
             <Row className='side-by-side'>
@@ -24,3 +22,5 @@ export default ({caseSize, caseCount, setCaseCount, customRules, caseItems, setC
         </div>
     )
 }
+
+export default SideBySideDisplay;

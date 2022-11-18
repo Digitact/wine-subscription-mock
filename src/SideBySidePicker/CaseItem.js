@@ -2,15 +2,14 @@ import React, {useState} from "react";
 import {Row, Col, Button} from 'react-bootstrap';
 import {Strings, Language} from '../assets/Strings';
 
-export default({defaultQuantity, item, caseSize, totalItems, setTotalItems, caseItems, setCaseItems, bgClass}) => {
+const CaseItem = ({defaultQuantity, item, caseSize, totalItems, setTotalItems, caseItems, setCaseItems, bgClass}) => {
   const [localQuantity, setLocalQuantity] = useState(defaultQuantity)  
   
   const cur = Strings[Language].CaseItem;
   const Qty = cur['Quantity']
   const Limit = cur['Limit']
   const Minimum = cur['Minimum']
-  const Required = cur['Required']
-
+  
   const incrementLocalQuantity = (e, o, q) => {
         e.preventDefault();
         if (o !== null) {
@@ -72,14 +71,16 @@ export default({defaultQuantity, item, caseSize, totalItems, setTotalItems, case
           <Row className='square-150'>
             <img src={item.image} height={140}
                 className="px-5"
-                style={{ objectFit: "contain" }}/>
+                style={{ objectFit: "contain" }}
+                alt={item.title}
+            />
           </Row>
             <Row className="m-auto">
                 <Col xxs={3} md={3} className="w-25 d-flex justify-content-end p-0">
                     <Button variant='dark'
                     className={"circle-button-bg " + bgClass}
                     onClick={(e) => decrementLocalQuantity(e, item, localQuantity)}
-                    disabled={localQuantity==item.min}
+                    disabled={localQuantity===item.min}
                     >
                     <b>-</b>
                     </Button>
@@ -91,7 +92,7 @@ export default({defaultQuantity, item, caseSize, totalItems, setTotalItems, case
                     <Button variant='dark'
                     className={"circle-button-bg " + bgClass}
                     onClick={(e) => incrementLocalQuantity(e, item, localQuantity)}
-                    disabled={totalItems==caseSize || localQuantity==item.max}
+                    disabled={totalItems===caseSize || localQuantity===item.max}
                     >
                     <b>+</b>
                     </Button>
@@ -114,3 +115,5 @@ export default({defaultQuantity, item, caseSize, totalItems, setTotalItems, case
         </Col>
     )
 }
+
+export default CaseItem;

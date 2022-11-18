@@ -1,8 +1,7 @@
 import React, {useState} from "react";
-import { Button, Image, Row, Col} from "react-bootstrap";
-import FinishButton from '../assets/FinishButton.svg';
+import { Button, Row, Col} from "react-bootstrap";
 
-export default({selectedProduct, selectedSellingPlan, stepLabels, selectedProductImage, caseItems}) => {
+const AddToCart = ({selectedProduct, selectedSellingPlan, stepLabels, selectedProductImage, caseItems}) => {
     const [errorMessage, setErrorMessage] = useState("")
 
     var properties = {};
@@ -76,7 +75,7 @@ export default({selectedProduct, selectedSellingPlan, stepLabels, selectedProduc
             <div class="my-4">
                 <Row>
                     <Col sm={3} md={3} lg={3}>
-                    <img src={selectedProductImage} class="w-100" />
+                    <img src={selectedProductImage} class="w-100" alt="" />
                     </Col>
                     <Col>
                     {stepLabels && stepLabels.map((o) => {
@@ -93,10 +92,12 @@ export default({selectedProduct, selectedSellingPlan, stepLabels, selectedProduc
                     <Button variant="dark" className='black-button' onClick={(e) => addToShopify(e)}>
                         Add To Cart
                     </Button>
-                    {errorMessage!=""?<div className='mt-2 alert alert-danger'>{errorMessage}</div>:<></>}                   
+                    {errorMessage!==""?<div className='mt-2 alert alert-danger'>{errorMessage}</div>:<></>}                   
                     </Col>
                 </Row>
             </div>        
         </div>
     )
 }
+
+export default AddToCart;

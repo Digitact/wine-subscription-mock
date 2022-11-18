@@ -1,9 +1,8 @@
 import React from "react";
-import { Button, Row, Col, Image } from "react-bootstrap";
+import { Button, Row, Col } from "react-bootstrap";
 import WineList from './WineList'
-import SelectButton from '../assets/SelectButton.svg';
 
-export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels, selectedProduct, setSelectedProduct, showCustomiseStep, setCustomRules, setSelectedProductImage, setCaseItems, caseSize, setCaseSize}) => {
+const SubscriptionGroupsPicker = ({currentStep, stepData, incrementStep, stepLabels, setStepLabels, selectedProduct, setSelectedProduct, showCustomiseStep, setCustomRules, setSelectedProductImage, setCaseItems, caseSize, setCaseSize}) => {
     let prodCols = []
     const products = stepData[currentStep]
 
@@ -13,7 +12,7 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
         let sl = stepLabels
         sl[currentStep] = {key:'Your product: ', name:o.product_title} //+', '+o.variant_title        
         setStepLabels(sl)
-        if (selectedProduct!=o.shopify_id) {
+        if (selectedProduct!==o.shopify_id) {
             //reset case if changing product
             setCaseItems([]);
         }
@@ -21,7 +20,7 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
         setSelectedProductImage(o.image)
         if (typeof(o.product_case) !== 'undefined' && o.product_case != null) {
             if (typeof(o.product_case.case_type) !== 'undefined' && o.product_case.case_type != null) {
-                if (o.product_case.case_type == 'Custom' && (typeof(o.product_case.product_case_wines) !== 'undefined' && o.product_case.product_case_wines != null)) {
+                if (o.product_case.case_type === 'Custom' && (typeof(o.product_case.product_case_wines) !== 'undefined' && o.product_case.product_case_wines !== null)) {
                     showCustomiseStep(true);
                     setCustomRules(o.product_case.product_case_wines);
                 } else {
@@ -46,14 +45,11 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
     }
 */
     products.forEach((o) => {
-        var imageUrl = o.image;
-        var backgroundUrl = "url('"+imageUrl+"')";
-        //'background-image':backgroundUrl,
         prodCols.push(
         <Col className='m-2 d-flex align-items-stretch product-button'>
             <Button className='p-3 d-flex flex-column align-items-start w-100' onClick={(e) => selectGroup(e, o)}>
             <div class="w-100" style={{ 'justify-content': 'center', 'align-items': 'center', 'display': 'flex', 'height':'300px' }}>
-                <img src={o.image} style={{ 'max-width':'100%', 'max-height':'100%', 'height': 'auto' }} />
+                <img src={o.image} style={{ 'max-width':'100%', 'max-height':'100%', 'height': 'auto' }} alt="" />
             </div>
             <h4>
             {o.product_title}
@@ -83,3 +79,5 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
         </div>
     )
 }
+
+export default SubscriptionGroupsPicker;

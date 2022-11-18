@@ -1,8 +1,7 @@
 import React from "react";
-import { Row, Col, Button, Image } from "react-bootstrap";
-import SelectButton from '../assets/SelectButton.svg';
+import { Row, Col, Button } from "react-bootstrap";
 
-export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels, setSelectedSellingPlan}) => {
+const SubscriptionTypePicker = ({currentStep, stepData, incrementStep, stepLabels, setStepLabels, setSelectedSellingPlan}) => {
     let cols = []
     const sellingPlanGroups = stepData[currentStep].selling_plan_groups
     
@@ -12,17 +11,9 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
         let sl = stepLabels
         sl[currentStep] = {key:'Your susbcription: ', name:o.name}
         setStepLabels(sl)
-        //setSelectedSellingPlan(o.shopify_id)
-        //alert(o)
-
         incrementStep(o)
     }
-/*
-    if (sellingPlanGroups.length===1) {
-        selectPlan(null,sellingPlanGroups[0]);
-    }
-*/
-    if (sellingPlanGroups.length==1) cols.push(<Col className='m-2 d-flex align-items-stretch product-button align-self-center'></Col>);
+    if (sellingPlanGroups.length===1) cols.push(<Col className='m-2 d-flex align-items-stretch product-button align-self-center'></Col>);
     sellingPlanGroups.forEach((o) => {
         cols.push(
         <Col md={4} className='m-2 d-flex align-items-stretch product-button align-self-center'>
@@ -33,7 +24,7 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
         </Col>
         )
     })
-    if (sellingPlanGroups.length==1) cols.push(<Col className='m-2 d-flex align-items-stretch product-button align-self-center'></Col>);
+    if (sellingPlanGroups.length===1) cols.push(<Col className='m-2 d-flex align-items-stretch product-button align-self-center'></Col>);
 
     return(
         <div>
@@ -52,3 +43,5 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
         </div>
     )
 }
+
+export default SubscriptionTypePicker;

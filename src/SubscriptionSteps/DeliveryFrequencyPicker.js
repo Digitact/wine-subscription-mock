@@ -1,8 +1,7 @@
 import React from "react";
-import { Row, Col, Button, Image } from "react-bootstrap";
-import SelectButton from '../assets/SelectButton.svg';
+import { Row, Col, Button } from "react-bootstrap";
 
-export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels, setSelectedSellingPlan}) => {
+const DeliveryFrequencyPicker = ({currentStep, stepData, incrementStep, stepLabels, setStepLabels, setSelectedSellingPlan}) => {
     let cols = []
     let deliveryDetails = stepData[currentStep].selling_plans
 
@@ -22,7 +21,7 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
         selectDelivery(null,deliveryDetails[0]);
     }
 */
-    if (deliveryDetails.length==1) cols.push(<Col className='m-2 d-flex align-items-stretch product-button align-self-center'></Col>);
+    if (deliveryDetails.length===1) cols.push(<Col className='m-2 d-flex align-items-stretch product-button align-self-center'></Col>);
     deliveryDetails.forEach((o) => {
         cols.push(
         <Col className='m-2 d-flex align-items-stretch product-button align-self-center'>
@@ -33,7 +32,7 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
         </Col>
         )
     })
-    if (deliveryDetails.length==1) cols.push(<Col className='m-2 d-flex align-items-stretch product-button align-self-center'></Col>);
+    if (deliveryDetails.length===1) cols.push(<Col className='m-2 d-flex align-items-stretch product-button align-self-center'></Col>);
 
     return (
       <div>
@@ -52,3 +51,5 @@ export default({currentStep, stepData, incrementStep, stepLabels, setStepLabels,
       </div>  
     )
 }
+
+export default DeliveryFrequencyPicker;
