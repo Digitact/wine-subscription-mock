@@ -1,8 +1,14 @@
 export interface AppState {
-    currentStep: StepType;
+    currentStep: StepPosition;
     steps: Step[];
     stepLabels: StepLabel[];
     products: Product[];
+    caseSize: number;
+    showCustomiseStep: boolean;
+    selectedProductId: Product['shopify_id'];
+    selectedSellingPlanId: SellingPlan['shopify_id'];
+    customRules: ProductCaseWine[];
+    customRuleId: ProductCaseWine['sku'];
 }
 
 export interface StepLabel {
@@ -11,7 +17,8 @@ export interface StepLabel {
 }
 
 export interface Step {
-    name: StepType;
+    step: StepPosition;
+    name: StepTitle;
     state: StepState;
     visible: boolean;
 }
@@ -22,7 +29,15 @@ export enum StepState {
     Incomplete = 'incomplete',
 }
 
-export enum StepType {
+export enum StepPosition {
+    Step1 = 1,
+    Step2 = 2,
+    Step3 = 3,
+    Step4 = 4,
+    Step5 = 5,
+}
+
+export enum StepTitle {
     Step1 = 'Subscription',
     Step2 = "What's Included",
     Step3 = 'Delivery Frequency',
@@ -53,10 +68,15 @@ export interface ProductCaseWine {
     shopify_id: string;
 }
 
+export enum ProductCaseType {
+    Custom = 'Custom',
+    Fixed = 'Fixed',
+}
+
 export interface ProductCase {
     product_id: string;
     case_size: string;
-    case_type: string;
+    case_type: ProductCaseType;
     product_case_wines: ProductCaseWine[];
 }
 
@@ -72,6 +92,11 @@ export interface SellingPlan {
     position: string;
 }
 
+export enum SellPlanGroup {
+    Automatic = 'Automatic',
+    Manual = 'Manual',
+}
+
 export interface SellingPlanGroup {
     id: string;
     region_id: string;
@@ -82,7 +107,7 @@ export interface SellingPlanGroup {
     position: string;
     options: string;
     shopify_id: string;
-    type: string;
+    type: SellPlanGroup;
     selling_plans: SellingPlan[];
 }
 
@@ -102,4 +127,8 @@ export interface Product {
     image: string;
     product_case: ProductCase;
     selling_plan_groups: SellingPlanGroup[];
+}
+
+export interface IconProps {
+    className?: string;
 }

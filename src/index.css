@@ -1,9 +1,18 @@
-@import './custombootstrap.css';
+/* @import './custombootstrap.css'; */
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+html,
+body {
+  @apply font-serif;
+}
 
 .subscription-module {
     margin: 0;
     /*
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
     */
@@ -467,3 +476,5 @@ h3 {
   text-align: center;
   width: 100%;
 }
+
+

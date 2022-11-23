@@ -11,8 +11,7 @@ import WineOrange from '../assets/WineOrange.png';
 import WineSweet from '../assets/WineSweet.png';
 import WineFortified from '../assets/WineFortified.png';
 
-//TODO: Colour code the bottles!
-
+// TODO: Colour code the bottles!
 export const CaseDiagram = ({ caseSize, caseItems }) => {
     const validItems = [];
     const itemIcons = [];

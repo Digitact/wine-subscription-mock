@@ -1,53 +1,45 @@
-import { Row, Col, Button } from 'react-bootstrap';
+import { useEffect } from 'react';
+import { useStoreContext } from '@/store/context';
+import { SellingPlanGroup } from '@/utils/types';
+import { selectSellingPlan } from '@/store/actions';
 
-export const SubscriptionTypePicker = ({ currentStep, stepData, incrementStep, stepLabels, setStepLabels, setSelectedSellingPlan }) => {
-    const cols = [];
-    const sellingPlanGroups = stepData[currentStep].selling_plan_groups;
+export function SubscriptionTypePicker() {
+    const { state, dispatch } = useStoreContext();
+    const sellingPlanGroups =
+        state.products.find((product) => product.shopify_id === state.selectedProductId)?.selling_plan_groups ?? [];
 
-    const selectPlan = (e, o) => {
-        if (e !== null) e.preventDefault();
-
-        const sl = stepLabels;
-        sl[currentStep] = { key: 'Your susbcription: ', name: o.name };
-        setStepLabels(sl);
-        incrementStep(o);
+    const selectPlan = (plan: SellingPlanGroup) => {
+        dispatch(selectSellingPlan(plan.shopify_id));
     };
 
-    if (sellingPlanGroups.length === 1) {
-        //skip if only 1 option
-        selectPlan(null, sellingPlanGroups[0]);
-    }
+    useEffect(() => {
+        if (sellingPlanGroups.length === 1) {
+            dispatch(selectSellingPlan(sellingPlanGroups[0].shopify_id));
+        }
+    }, [sellingPlanGroups, dispatch]);
 
-    if (sellingPlanGroups.length === 1) cols.push(<Col className="m-2 d-flex align-items-stretch product-button align-self-center"></Col>);
-    sellingPlanGroups.forEach(o => {
-        cols.push(
-            <Col md={4} className="m-2 d-flex align-items-stretch product-button align-self-center">
-                <Button className="p-3 d-flex flex-column align-items-start w-100" onClick={e => selectPlan(e, o)}>
-                    <h4>{o.name}</h4>
-                    <p>{o.description}</p>
-                </Button>
-            </Col>,
-        );
-    });
-    if (sellingPlanGroups.length === 1) cols.push(<Col className="m-2 d-flex align-items-stretch product-button align-self-center"></Col>);
+    const cols = sellingPlanGroups.map((plan) => (
+        <div key={plan.id} className="m-2 d-flex align-items-stretch product-button align-self-center">
+            <button className="flex-col p-3 d-flex align-items-start w-100" onClick={() => selectPlan(plan)}>
+                <h4>{plan.name}</h4>
+                <p dangerouslySetInnerHTML={{ __html: plan.description }}></p>
+            </button>
+        </div>
+    ));
+
+    const selectedPlan = state.products
+        .find((product) => product.shopify_id === state.selectedProductId)
+        ?.selling_plan_groups.find((plan) => plan.id === state.selectedSellingPlanId);
 
     return (
         <div>
-            <Row>
-                {stepLabels &&
-                    stepLabels.map(o => {
-                        return (
-                            <Col>
-                                <p>
-                                    <b>{o.key}</b>
-                                    {o.name}
-                                </p>
-                            </Col>
-                        );
-                    })}
-            </Row>
-
-            <Row className="justify-content-center">{cols}</Row>
+            <div>
+                <p>
+                    <b>Your susbcription: </b>
+                    {selectedPlan?.name}
+                </p>
+            </div>
+            <div className="flex justify-center">{cols}</div>
         </div>
     );
-};
+}

@@ -9,7 +9,7 @@ export const GlobalPicker = ({ caseSize, caseItems, setCaseItems, caseCount, set
     const [firstRun, setFirstRun] = useState(true);
     const [stock, setStock] = useState([]);
 
-    const _setTotalItems = i => {
+    const _setTotalItems = (i) => {
         setTotalItems(i);
         setCaseCount(i);
     };

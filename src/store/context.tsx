@@ -1,45 +1,56 @@
-import { createContext, Dispatch, useContext, useReducer } from 'react';
+import { createContext, Dispatch, DispatchWithoutAction, useContext, useReducer } from 'react';
 import { useMemoCompare } from '@/hooks/useMemoCompare';
-import { AppState, StepState, StepType } from '@/utils/types';
+import { AppState, StepState, StepPosition, StepTitle } from '@/utils/types';
 import { Actions } from '@/store/actions';
 import { storeReducer } from '@/store/reducer';
 
 export const initialState: AppState = {
-    currentStep: StepType.Step1,
-    stepLabels: [],
+    currentStep: StepPosition.Step1,
+    stepLabels: [{ key: '', name: '' }],
     steps: [
         {
-            name: StepType.Step1,
+            step: StepPosition.Step1,
+            name: StepTitle.Step1,
             state: StepState.Current,
             visible: true,
         },
         {
-            name: StepType.Step2,
+            step: StepPosition.Step2,
+            name: StepTitle.Step2,
             state: StepState.Incomplete,
             visible: true,
         },
         {
-            name: StepType.Step3,
+            step: StepPosition.Step3,
+            name: StepTitle.Step3,
             state: StepState.Incomplete,
             visible: true,
         },
         {
-            name: StepType.Step4,
+            step: StepPosition.Step4,
+            name: StepTitle.Step4,
             state: StepState.Incomplete,
             visible: true,
         },
         {
-            name: StepType.Step5,
+            step: StepPosition.Step5,
+            name: StepTitle.Step5,
             state: StepState.Incomplete,
             visible: true,
         },
     ],
     products: [],
+    caseSize: 12,
+    customRules: [],
+    customRuleId: '',
+    showCustomiseStep: false,
+    selectedProductId: '',
+    selectedSellingPlanId: '',
 };
 
 type StoreContext = {
     state: AppState;
-    dispatch: Dispatch<Actions>;
+    dispatch: DispatchWithoutAction | Dispatch<Actions>;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function

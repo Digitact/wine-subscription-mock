@@ -1,97 +1,40 @@
-import { Button, Row, Col } from 'react-bootstrap';
+import { useStoreContext } from '@/store/context';
+import { Product } from '@/utils/types';
+import { selectProduct } from '@/store/actions';
 import { WineList } from './WineList';
 
-export const SubscriptionGroupsPicker = ({
-    currentStep,
-    stepData,
-    incrementStep,
-    stepLabels,
-    setStepLabels,
-    selectedProduct,
-    setSelectedProduct,
-    showCustomiseStep,
-    setCustomRules,
-    setSelectedProductImage,
-    setCaseItems,
-    caseSize,
-    setCaseSize,
-}) => {
-    const prodCols = [];
-    const products = stepData[currentStep];
+export function SubscriptionGroupsPicker() {
+    const { state, dispatch } = useStoreContext();
 
-    const selectGroup = (e, o) => {
-        if (e !== null) e.preventDefault();
-
-        const sl = stepLabels;
-        sl[currentStep] = { key: 'Your product: ', name: o.product_title }; //+', '+o.variant_title
-        setStepLabels(sl);
-        if (selectedProduct !== o.shopify_id) {
-            //reset case if changing product
-            setCaseItems([]);
-        }
-        setSelectedProduct(o.shopify_id);
-        setSelectedProductImage(o.image);
-        if (typeof o.product_case !== 'undefined' && o.product_case != null) {
-            if (typeof o.product_case.case_type !== 'undefined' && o.product_case.case_type != null) {
-                if (
-                    o.product_case.case_type === 'Custom' &&
-                    typeof o.product_case.product_case_wines !== 'undefined' &&
-                    o.product_case.product_case_wines !== null
-                ) {
-                    showCustomiseStep(true);
-                    setCustomRules(o.product_case.product_case_wines);
-                } else {
-                    showCustomiseStep(false);
-                }
-            }
-            if (typeof o.product_case.case_size !== 'undefined' && o.product_case.case_size != null) {
-                setCaseSize(o.product_case.case_size);
-            }
-        } else {
-            showCustomiseStep(false);
-            setCustomRules([]);
-        }
-        //alert(o)
-
-        incrementStep(o);
+    const selectGroup = (product: Product) => {
+        dispatch(selectProduct(product));
     };
-    /*
-    if (products.length===1) {
-        selectGroup(null,products[0]);
-    }
-*/
-    products.forEach(o => {
-        prodCols.push(
-            <Col className="m-2 d-flex align-items-stretch product-button">
-                <Button className="p-3 d-flex flex-column align-items-start w-100" onClick={e => selectGroup(e, o)}>
-                    <div class="w-100" style={{ 'justify-content': 'center', 'align-items': 'center', display: 'flex', height: '300px' }}>
-                        <img src={o.image} style={{ 'max-width': '100%', 'max-height': '100%', height: 'auto' }} alt="" />
-                    </div>
-                    <h4>{o.product_title}</h4>
-                    <p class="case_description">{o.product_description}</p>
-                    <WineList wines={o.product_case.product_case_wines} />
-                </Button>
-            </Col>,
-        );
-    });
+
+    const prodCols = state.products.map((product) => (
+        <div className="inline-flex items-stretch flex-grow w-1/5 p-4 border border-gray-300" key={product.shopify_id}>
+            <button className="flex flex-col items-start w-full p-3" onClick={() => selectGroup(product)}>
+                <div className="mb-6">
+                    <img src={product.image} className="max-h-full" alt={product.product_title} />
+                </div>
+                <h4 className="text-2xl">{product.product_title}</h4>
+                <p className="text-base">{product.product_description}</p>
+                <WineList wines={product.product_case.product_case_wines} />
+            </button>
+        </div>
+    ));
+
+    const selectedProduct = state.products.find((product) => product.shopify_id === state.selectedProductId);
 
     return (
-        <div>
-            <Row>
-                {stepLabels &&
-                    stepLabels.map(o => {
-                        return (
-                            <Col>
-                                <p>
-                                    <b>{o.key}</b>
-                                    {o.name}
-                                </p>
-                            </Col>
-                        );
-                    })}
-            </Row>
+        <>
+            {selectedProduct && (
+                <p>
+                    <b>Your product</b>
+                    {selectedProduct?.product_title}
+                </p>
+            )}
 
-            <Row>{prodCols}</Row>
-        </div>
+            <div className="flex">{prodCols}</div>
+        </>
     );
-};
+}

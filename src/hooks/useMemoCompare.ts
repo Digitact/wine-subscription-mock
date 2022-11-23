@@ -17,5 +17,5 @@ export function useMemoCompare<Type>(next: Type) {
         }
     });
     // Finally, if equal then return the previous value
-    return equal ? previous : next;
+    return equal && previous ? previous : next;
 }

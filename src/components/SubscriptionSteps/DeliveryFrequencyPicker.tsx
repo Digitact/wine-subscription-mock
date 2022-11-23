@@ -1,6 +1,13 @@
 import { Row, Col, Button } from 'react-bootstrap';
 
-export const DeliveryFrequencyPicker = ({ currentStep, stepData, incrementStep, stepLabels, setStepLabels, setSelectedSellingPlan }) => {
+export const DeliveryFrequencyPicker = ({
+    currentStep,
+    stepData,
+    incrementStep,
+    stepLabels,
+    setStepLabels,
+    setSelectedSellingPlan,
+}) => {
     const cols = [];
     const deliveryDetails = stepData[currentStep].selling_plans;
 
@@ -21,24 +28,26 @@ export const DeliveryFrequencyPicker = ({ currentStep, stepData, incrementStep, 
         selectDelivery(null, deliveryDetails[0]);
     }
 
-    if (deliveryDetails.length === 1) cols.push(<Col className="m-2 d-flex align-items-stretch product-button align-self-center"></Col>);
-    deliveryDetails.forEach(o => {
+    if (deliveryDetails.length === 1)
+        cols.push(<Col className="m-2 d-flex align-items-stretch product-button align-self-center"></Col>);
+    deliveryDetails.forEach((o) => {
         cols.push(
             <Col className="m-2 d-flex align-items-stretch product-button align-self-center">
-                <Button className="p-3 d-flex flex-column align-items-start w-100" onClick={e => selectDelivery(e, o)}>
+                <Button className="flex-col p-3 d-flex align-items-start w-100" onClick={(e) => selectDelivery(e, o)}>
                     <h4>{o.name}</h4>
                     <p>{o.description}</p>
                 </Button>
             </Col>,
         );
     });
-    if (deliveryDetails.length === 1) cols.push(<Col className="m-2 d-flex align-items-stretch product-button align-self-center"></Col>);
+    if (deliveryDetails.length === 1)
+        cols.push(<Col className="m-2 d-flex align-items-stretch product-button align-self-center"></Col>);
 
     return (
         <div>
             <Row>
                 {stepLabels &&
-                    stepLabels.map(o => {
+                    stepLabels.map((o) => {
                         return (
                             <Col>
                                 <p>
