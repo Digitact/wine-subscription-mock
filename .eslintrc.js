@@ -14,10 +14,11 @@ module.exports = {
         node: true,
     },
     parser: '@typescript-eslint/parser',
-    plugins: ['@typescript-eslint', 'import', 'prettier'],
+    plugins: ['@typescript-eslint', 'import', 'prettier', 'react'],
     extends: [
         'prettier',
         'eslint:recommended',
+        "plugin:react/jsx-runtime",
         'plugin:prettier/recommended',
         'plugin:@typescript-eslint/recommended',
         'plugin:import/recommended',
@@ -39,6 +40,9 @@ module.exports = {
         ],
     },
     settings: {
+        react: {
+            version: 'detect',
+        },
         'import/resolver': {
             typescript: {
                 alwaysTryTypes: true,
