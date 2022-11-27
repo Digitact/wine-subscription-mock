@@ -1,3 +1,12 @@
+import { ShopifyErrorResponse } from './types';
+
+export function isErrorResponse(data: unknown): data is ShopifyErrorResponse {
+    return (
+        (data as ShopifyErrorResponse).message !== undefined &&
+        typeof (data as ShopifyErrorResponse).message === 'string'
+    );
+}
+
 /**
  * Typeguard helper to check for null items
  * @param o Item to check for null-ness

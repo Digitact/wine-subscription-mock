@@ -7,13 +7,13 @@ import { CheckIcon } from './Icons/CheckIcon';
 export function FlowHeader() {
     const { state, dispatch } = useStoreContext();
 
-    const rows = state.steps.map((step, index) => (
+    const rows = state.steps.map((step) => (
         <div
             key={step.step}
-            className={clsx(`${step.state}-step`, 'w-1/5')}
+            className={clsx(`${step.state}-step`, 'w-1/5 mb-4')}
             onClick={(e) => {
                 e.preventDefault();
-                dispatch(gotoStep(index));
+                dispatch(gotoStep(step.step));
             }}
         >
             <h3 className="flex items-center w-full text-4xl text-dark">

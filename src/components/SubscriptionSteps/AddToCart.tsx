@@ -1,98 +1,67 @@
-import { useState } from 'react';
-import { Button, Row, Col } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { useStoreContext } from '@/store/context';
+import { useAddToCartMutation } from '@/hooks/useAddToCartMutation';
+import { FlowSelection } from '../FlowSelection';
 
-export const AddToCart = ({ selectedProduct, selectedSellingPlan, stepLabels, selectedProductImage, caseItems }) => {
+export function AddToCart() {
+    const { state } = useStoreContext();
     const [errorMessage, setErrorMessage] = useState('');
+    const { mutate, isError, isLoading, data, isSuccess, error } = useAddToCartMutation();
 
-    const properties = {};
-    const totals = {};
-    const c = [...caseItems];
-    for (let i = 0; i < c.length; i++) {
-        if (totals[c[i].title] === undefined) totals[c[i].title] = 1;
-        else totals[c[i].title] = totals[c[i].title] + 1;
-    }
-    console.log(totals);
-    let counter = 1;
-    Object.keys(totals).forEach(key => {
-        properties['Wine ' + counter] = totals[key] + ' x ' + key;
-        counter++;
-    });
-    console.log(properties);
-    console.log(caseItems);
+    const selectedProduct = state.products.find((product) => product.shopify_id === state.selectedProductId);
 
-    const addToShopify = e => {
-        e.preventDefault();
+    useEffect(() => {
+        if (isError && error) {
+            setErrorMessage(error.message);
+        }
+        if (isSuccess && data) {
+            window.goCartInstance.addItemToCartHandler(data);
+        }
+    }, [isError]);
+
+    const addToShopify = () => {
         setErrorMessage('');
+
+        const properties = state.caseItems.reduce<Record<string, string>>((props, item, index) => {
+            props[`Wine ${index + 1}`] = `${item.quantity} x ${item.title}`;
+            return props;
+        }, {});
 
         const formData = {
             items: [
                 {
-                    id: selectedProduct,
+                    id: state.selectedProductId,
                     quantity: 1,
-                    selling_plan: selectedSellingPlan,
+                    selling_plan: state.selectedSellingPlanId,
                     properties: properties,
                 },
             ],
         };
-        //alert(formData)
-        fetch(window.Shopify.routes.root + 'cart/add.js', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        })
-            //.then(response => {
-            //    return response.json();
-            //})
-            .then(response => response.json())
-            .then(response => {
-                if (response.status) {
-                    //this.handleErrorMessage(response.description);
-                    setErrorMessage(response.description);
-                    return;
-                }
 
-                console.log('goCartInstance:', window.goCartInstance);
-                if (window.goCartInstance) {
-                    window.goCartInstance.addItemToCartHandler(response);
-                } else {
-                    this.cartNotification.renderContents(response);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+        mutate(formData);
     };
 
     return (
         <div>
             <h3>Your subscription is ready.</h3>
-            <div class="my-4">
-                <Row>
-                    <Col sm={3} md={3} lg={3}>
-                        <img src={selectedProductImage} class="w-100" alt="" />
-                    </Col>
-                    <Col>
-                        {stepLabels &&
-                            stepLabels.map(o => {
-                                return (
-                                    <p>
-                                        <b>{o.key}</b>
-                                        {o.name}
-                                    </p>
-                                );
-                            })}
-                        {Object.values(properties).map((value, index) => {
-                            return <p>{value}</p>;
-                        })}
-                        <Button variant="dark" className="black-button" onClick={e => addToShopify(e)}>
+            <FlowSelection />
+            <div className="my-4">
+                <div>
+                    <div className="w-1/4">
+                        <img src={selectedProduct?.image} className="w-full" alt={selectedProduct?.product_title} />
+                    </div>
+                    <div>
+                        <button
+                            className="w-full px-8 py-4 text-white bg-black"
+                            disabled={isLoading}
+                            onClick={addToShopify}
+                        >
                             Add To Cart
-                        </Button>
+                        </button>
                         {errorMessage !== '' ? <div className="mt-2 alert alert-danger">{errorMessage}</div> : <></>}
-                    </Col>
-                </Row>
+                    </div>
+                </div>
             </div>
         </div>
     );
-};
+}

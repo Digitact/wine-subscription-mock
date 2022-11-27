@@ -41,10 +41,16 @@ export const initialState: AppState = {
     ],
     products: [],
     caseSize: 12,
+    selectedCaseCount: 12,
     customRules: [],
     customRuleId: '',
+    caseType: undefined,
     showCustomiseStep: false,
     selectedProductId: '',
+    sellingPlanGroups: [],
+    caseItems: [],
+    selectedSellingGroupPlanId: '',
+    sellingPlans: [],
     selectedSellingPlanId: '',
 };
 

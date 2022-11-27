@@ -1,98 +1,53 @@
-import { useState, useEffect } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import clsx from 'clsx';
+import { useStoreContext } from '@/store/context';
+import { decrementCaseItem, incrementCaseItem } from '@/store/actions';
+import { ProductCaseWine } from '@/utils/types';
 import { CaseItem } from './CaseItem';
 
-export const GlobalPicker = ({ caseSize, caseItems, setCaseItems, caseCount, setCaseCount, customRules }) => {
-    const [loading, setLoading] = useState(true);
-    const [totalItems, setTotalItems] = useState(0);
-    const [defaultWines, setDefaultWines] = useState([]);
-    const [firstRun, setFirstRun] = useState(true);
-    const [stock, setStock] = useState([]);
+export function GlobalPicker() {
+    const { state, dispatch } = useStoreContext();
 
-    const _setTotalItems = (i) => {
-        setTotalItems(i);
-        setCaseCount(i);
+    const handleIncrement = (item: ProductCaseWine) => {
+        dispatch(incrementCaseItem(item));
     };
 
-    useEffect(() => {
-        async function fillStock() {
-            setDefaultWines(customRules);
-            setStock(customRules);
-            setLoading(false);
-        }
-        fillStock();
-    }, [totalItems]);
-
-    let theme = 'case-item-light';
-
-    const switchTheme = () => {
-        if (theme === 'case-item-light') {
-            theme = 'case-item-dark';
-        } else {
-            theme = 'case-item-light';
-        }
+    const handleDecrement = (item: ProductCaseWine) => {
+        dispatch(decrementCaseItem(item));
     };
-
-    if (loading) {
-        return <p>Loading casepicker...</p>;
-    }
-
-    if (firstRun && defaultWines) {
-        setFirstRun(false);
-
-        const vd = [];
-        const wines = [];
-        let t = 0;
-        //on the first run through we want to populate the case with any defaults mandated by the vendor
-        defaultWines.forEach((w, i) => {
-            for (let i = 0; i < w.quantity; i++) {
-                wines.push(w);
-            }
-            vd.push(w);
-            t += parseInt(w.quantity);
-        });
-        setCaseItems(wines);
-        _setTotalItems(t);
-    }
 
     return (
         <div>
-            <Row className="my-2">
-                <Col>
+            <div className="my-2">
+                <div>
                     <h3>
-                        Selected: {totalItems}/{caseSize}
+                        Selected: {state.selectedCaseCount}/{state.caseSize}
                     </h3>
-                </Col>
-            </Row>
-            <Row className="scrollable m-0">
-                <Row>
-                    {stock.length &&
-                        stock.map((o, i) => {
-                            if (i !== 0 && (i - 1) % 2 === 0) {
-                                switchTheme();
-                            }
-
-                            const classname = 'm-0 d-block ' + theme;
-
-                            return (
-                                <Col md={6} className={classname}>
-                                    <CaseItem
-                                        defaultQuantity={o.quantity}
-                                        item={o}
-                                        caseSize={caseSize}
-                                        totalItems={totalItems}
-                                        setTotalItems={_setTotalItems}
-                                        caseItems={caseItems}
-                                        setCaseItems={setCaseItems}
-                                        bgClass={theme}
-                                    />
-                                </Col>
-                            );
-                        })}
-                </Row>
-            </Row>
+                </div>
+            </div>
+            <div className="flex scrollable">
+                <div className="flex">
+                    {state.caseItems.map((item, index) => (
+                        <div
+                            key={item.title + index + item.shopify_id}
+                            className={clsx('w-1/2', index % 2 ? 'case-item-light' : 'case-item-dark')}
+                        >
+                            <CaseItem
+                                onIncrement={() => handleIncrement(item)}
+                                onDecrement={() => handleDecrement(item)}
+                                image={item.image}
+                                title={item.title}
+                                disabled={state.selectedCaseCount === state.caseSize}
+                                wineType={item.wine_type}
+                                quantity={Number(item.quantity)}
+                                maxQuantity={Number(item.max)}
+                                minQuantity={Number(item.min)}
+                            />
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     );
-};
+}
 
 export default GlobalPicker;

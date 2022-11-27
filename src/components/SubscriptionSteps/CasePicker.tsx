@@ -1,75 +1,41 @@
-import { useState } from 'react';
-import { Row, Col, Button } from 'react-bootstrap';
-import SideBySideDisplay from '../../SideBySidePicker/SideBySideDisplay';
+import { SideBySideDisplay } from '@/SideBySidePicker/SideBySideDisplay';
+import { incrementStep } from '@/store/actions';
+import { useStoreContext } from '@/store/context';
+import { FlowSelection } from '../FlowSelection';
 
-export const CasePicker = ({
-    currentStep,
-    stepData,
-    incrementStep,
-    stepLabels,
-    setStepLabels,
-    customRules,
-    caseItems,
-    setCaseItems,
-    caseSize,
-    setCaseSize,
-}) => {
-    const [caseCount, setCaseCount] = useState(0);
+export function CasePicker() {
+    const { state, dispatch } = useStoreContext();
 
-    const finishCase = e => {
-        e.preventDefault();
-
-        //TODO: pass what in here?
-        incrementStep(null);
+    const finishCase = () => {
+        dispatch(incrementStep());
     };
 
     return (
         <div>
-            <Row>
-                {stepLabels &&
-                    stepLabels.map(o => {
-                        return (
-                            <Col>
-                                <p>
-                                    <b>{o.key}</b>
-                                    {o.name}
-                                </p>
-                            </Col>
-                        );
-                    })}
-            </Row>
+            <FlowSelection />
 
-            <Row>
-                <Col>
-                    {caseCount !== caseSize ? (
+            <div className="flex">
+                <div>
+                    {state.selectedCaseCount !== state.caseSize ? (
                         <p className="text-center">Please finalise your selection before continuing</p>
                     ) : (
                         <p className="text-center">You may now complete your order</p>
                     )}
-                </Col>
-                <Col className="d-flex align-items-right">
-                    <Button
-                        variant="dark"
-                        onClick={e => finishCase(e)}
-                        disabled={caseCount !== caseSize}
-                        className="product-form__submit button button--primary m-auto w-100 black-button"
+                </div>
+                <div className="flex align-items-right">
+                    <button
+                        onClick={() => finishCase()}
+                        disabled={state.selectedCaseCount !== state.caseSize}
+                        className="w-full px-8 py-4 text-white bg-black"
                     >
                         Continue
-                    </Button>
-                </Col>
-            </Row>
+                    </button>
+                </div>
+            </div>
 
-            <Row>
-                <SideBySideDisplay
-                    caseSize={caseSize}
-                    setCaseSize={setCaseSize}
-                    caseCount={caseCount}
-                    setCaseCount={setCaseCount}
-                    customRules={customRules}
-                    caseItems={caseItems}
-                    setCaseItems={setCaseItems}
-                />
-            </Row>
+            <div className="flex">
+                <SideBySideDisplay />
+            </div>
         </div>
     );
-};
+}

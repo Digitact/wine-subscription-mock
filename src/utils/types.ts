@@ -4,11 +4,17 @@ export interface AppState {
     stepLabels: StepLabel[];
     products: Product[];
     caseSize: number;
+    selectedCaseCount: number;
     showCustomiseStep: boolean;
     selectedProductId: Product['shopify_id'];
-    selectedSellingPlanId: SellingPlan['shopify_id'];
+    caseItems: ProductCaseWine[];
+    caseType?: ProductCaseType;
     customRules: ProductCaseWine[];
     customRuleId: ProductCaseWine['sku'];
+    sellingPlanGroups: SellingPlanGroup[];
+    selectedSellingGroupPlanId: SellingPlanGroup['shopify_id'];
+    sellingPlans: SellingPlan[];
+    selectedSellingPlanId: SellingPlan['shopify_id'];
 }
 
 export interface StepLabel {
@@ -55,6 +61,16 @@ export interface ErrorType {
     message: string;
 }
 
+export enum WineType {
+    Red = 'Red',
+    White = 'White',
+    Rose = 'Rose',
+    Sparkling = 'Sparkling',
+    Sweet = 'Sweet',
+    Fortified = 'Fortified',
+    Orange = 'Orange',
+}
+
 export interface ProductCaseWine {
     title: string;
     image: string;
@@ -64,7 +80,7 @@ export interface ProductCaseWine {
     max: string;
     selected: string;
     quantity: string;
-    wine_type: string;
+    wine_type: WineType;
     shopify_id: string;
 }
 
@@ -131,4 +147,10 @@ export interface Product {
 
 export interface IconProps {
     className?: string;
+}
+
+export interface ShopifyErrorResponse {
+    description: string;
+    message: string;
+    status: number;
 }

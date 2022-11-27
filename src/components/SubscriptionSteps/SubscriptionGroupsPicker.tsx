@@ -1,6 +1,6 @@
 import { useStoreContext } from '@/store/context';
 import { Product } from '@/utils/types';
-import { selectProduct } from '@/store/actions';
+import { incrementStep, selectProduct } from '@/store/actions';
 import { WineList } from './WineList';
 
 export function SubscriptionGroupsPicker() {
@@ -8,6 +8,7 @@ export function SubscriptionGroupsPicker() {
 
     const selectGroup = (product: Product) => {
         dispatch(selectProduct(product));
+        dispatch(incrementStep());
     };
 
     const prodCols = state.products.map((product) => (
@@ -23,17 +24,8 @@ export function SubscriptionGroupsPicker() {
         </div>
     ));
 
-    const selectedProduct = state.products.find((product) => product.shopify_id === state.selectedProductId);
-
     return (
         <>
-            {selectedProduct && (
-                <p>
-                    <b>Your product</b>
-                    {selectedProduct?.product_title}
-                </p>
-            )}
-
             <div className="flex">{prodCols}</div>
         </>
     );

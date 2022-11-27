@@ -38,7 +38,8 @@ export const Strings = {
         OurVision: {
             VisionEmphasis: 'Our vision',
             VisionHeader: 'and mission',
-            VisionSubheader: 'At the start of 2021 we released the beta version of WineHub, our working title for the eGRAB™ wine module.',
+            VisionSubheader:
+                'At the start of 2021 we released the beta version of WineHub, our working title for the eGRAB™ wine module.',
             VisionDetail:
                 'In a short space of time we have created and deployed a fully operational, wine centric platform applicable to vineyards and wholesalers, wine retailers, cellar doors, bonded warehouses and online merchants. We are at the beginning of our journey in wine technology, and can’t wait to share our developments as they unfold. ',
         },
@@ -115,11 +116,13 @@ export const Strings = {
             WarehouseCTA: 'Learn More',
 
             SyncHeaderText: 'Sync everything in one platform',
-            SyncDetailText: 'Perform a complete warehouse stock-take in minutes with RFID labelled cases (requires handheld RFID scanner)',
+            SyncDetailText:
+                'Perform a complete warehouse stock-take in minutes with RFID labelled cases (requires handheld RFID scanner)',
             SyncCTA: 'Learn More',
 
             MoreHeaderText: 'Whatever other feature goes here',
-            MoreDetailText: 'Perform a complete warehouse stock-take in minutes with RFID labelled cases (requires handheld RFID scanner)',
+            MoreDetailText:
+                'Perform a complete warehouse stock-take in minutes with RFID labelled cases (requires handheld RFID scanner)',
             MoreCTA: 'Learn More',
         },
 

@@ -11,7 +11,7 @@ import { StepPosition } from '@/utils/types';
 import { useStoreContext } from '@/store/context';
 import { addProducts } from '@/store/actions';
 
-const SubscriptionComponentMap: Record<string, ComponentType<any>> = {
+const SubscriptionComponentMap: Record<string, ComponentType> = {
     [StepPosition.Step1]: SubscriptionGroupsPicker,
     [StepPosition.Step2]: SubscriptionTypePicker,
     [StepPosition.Step3]: DeliveryFrequencyPicker,

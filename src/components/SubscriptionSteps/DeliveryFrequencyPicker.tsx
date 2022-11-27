@@ -1,66 +1,33 @@
-import { Row, Col, Button } from 'react-bootstrap';
+import { useStoreContext } from '@/store/context';
+import { SellingPlan } from '@/utils/types';
+import { incrementStep, selectSellingPlan } from '@/store/actions';
+import { FlowSelection } from '../FlowSelection';
 
-export const DeliveryFrequencyPicker = ({
-    currentStep,
-    stepData,
-    incrementStep,
-    stepLabels,
-    setStepLabels,
-    setSelectedSellingPlan,
-}) => {
-    const cols = [];
-    const deliveryDetails = stepData[currentStep].selling_plans;
+export function DeliveryFrequencyPicker() {
+    const { state, dispatch } = useStoreContext();
 
-    const selectDelivery = (e, o) => {
-        if (e !== null) e.preventDefault();
+    const deliveryDetails = state.sellingPlans;
 
-        const sl = stepLabels;
-        sl[currentStep] = { key: 'Delivery frequency: ', name: o.name };
-        setStepLabels(sl);
-        setSelectedSellingPlan(o.shopify_id);
-        //alert(o)
-
-        incrementStep(o);
+    const selectDelivery = (plan: SellingPlan) => {
+        dispatch(selectSellingPlan(plan));
+        dispatch(incrementStep());
     };
 
-    if (deliveryDetails.length === 1) {
-        //skip if only 1 option
-        selectDelivery(null, deliveryDetails[0]);
-    }
-
-    if (deliveryDetails.length === 1)
-        cols.push(<Col className="m-2 d-flex align-items-stretch product-button align-self-center"></Col>);
-    deliveryDetails.forEach((o) => {
-        cols.push(
-            <Col className="m-2 d-flex align-items-stretch product-button align-self-center">
-                <Button className="flex-col p-3 d-flex align-items-start w-100" onClick={(e) => selectDelivery(e, o)}>
-                    <h4>{o.name}</h4>
-                    <p>{o.description}</p>
-                </Button>
-            </Col>,
-        );
-    });
-    if (deliveryDetails.length === 1)
-        cols.push(<Col className="m-2 d-flex align-items-stretch product-button align-self-center"></Col>);
+    const cols = deliveryDetails.map((plan) => (
+        <div key={plan.shopify_id} className="flex items-stretch self-center p-2 product-button">
+            <button className="flex flex-col items-start w-full p-3" onClick={() => selectDelivery(plan)}>
+                <h4>{plan.name}</h4>
+                <p dangerouslySetInnerHTML={{ __html: plan.description }}></p>
+            </button>
+        </div>
+    ));
 
     return (
         <div>
-            <Row>
-                {stepLabels &&
-                    stepLabels.map((o) => {
-                        return (
-                            <Col>
-                                <p>
-                                    <b>{o.key}</b>
-                                    {o.name}
-                                </p>
-                            </Col>
-                        );
-                    })}
-            </Row>
-            <Row className="justify-content-center">{cols}</Row>
+            <FlowSelection />
+            <div className="flex justify-center">{cols}</div>
         </div>
     );
-};
+}
 
 export default DeliveryFrequencyPicker;
