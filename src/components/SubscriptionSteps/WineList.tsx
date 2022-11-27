@@ -1,6 +1,6 @@
 import { ProductCaseWine } from '@/utils/types';
 
-export const WineList = ({ wines }: { wines: ProductCaseWine[] }) => {
+export function WineList({ wines }: { wines: ProductCaseWine[] }) {
     return (
         <div className="wine_list">
             <ul>
@@ -14,4 +14,4 @@ export const WineList = ({ wines }: { wines: ProductCaseWine[] }) => {
             </ul>
         </div>
     );
-};
+}

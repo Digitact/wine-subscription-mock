@@ -2,7 +2,7 @@ import { AppState, ProductCaseType, ProductCaseWine, Step, StepPosition, StepSta
 import { Actions, ActionType } from '@/store/actions';
 
 function getNextStep(steps: Step[]): StepPosition | undefined {
-    return steps.find(({ state }) => state === StepState.Incomplete)?.step;
+    return steps.filter((step) => step.visible).find(({ state }) => state === StepState.Incomplete)?.step;
 }
 
 export function storeReducer(state = {} as AppState, { action, data }: Actions): AppState {
@@ -74,8 +74,15 @@ export function storeReducer(state = {} as AppState, { action, data }: Actions):
             const showCustomiseStep = data.product_case.case_type === ProductCaseType.Custom;
             const customRules = data.product_case.product_case_wines;
             const caseSize = Number(data.product_case.case_size);
+            const newSteps = state.steps.map((step) => {
+                if (step.step === StepPosition.Step4) {
+                    return { ...step, visible: showCustomiseStep };
+                }
+                return step;
+            });
             return {
                 ...state,
+                steps: newSteps,
                 showCustomiseStep,
                 caseSize,
                 selectedCaseCount: caseSize,
@@ -108,7 +115,8 @@ export function storeReducer(state = {} as AppState, { action, data }: Actions):
             if (!data) return state;
             const { caseItems, selectedCaseCount } = state;
             const newCaseItems: ProductCaseWine[] = caseItems.map((item) => {
-                if (item.shopify_id === data.shopify_id) {
+                if (item.title === data.title) {
+                    // Use shopify_id instead of title - but demo has no shopify_id
                     return {
                         ...item,
                         quantity: `${Number(item.quantity) + 1}`,
@@ -126,7 +134,8 @@ export function storeReducer(state = {} as AppState, { action, data }: Actions):
             if (!data) return state;
             const { caseItems, selectedCaseCount } = state;
             const newCaseItems: ProductCaseWine[] = caseItems.map((item) => {
-                if (item.shopify_id === data.shopify_id) {
+                if (item.title === data.title) {
+                    // Use shopify_id instead of title - but demo has no shopify_id
                     return {
                         ...item,
                         quantity: `${Number(item.quantity) - 1}`,

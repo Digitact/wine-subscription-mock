@@ -30,7 +30,7 @@ export const initialState: AppState = {
             step: StepPosition.Step4,
             name: StepTitle.Step4,
             state: StepState.Incomplete,
-            visible: true,
+            visible: false,
         },
         {
             step: StepPosition.Step5,

@@ -12,8 +12,11 @@ export function SubscriptionGroupsPicker() {
     };
 
     const prodCols = state.products.map((product) => (
-        <div className="inline-flex items-stretch flex-grow w-1/5 p-4 border border-gray-300" key={product.shopify_id}>
-            <button className="flex flex-col items-start w-full p-3" onClick={() => selectGroup(product)}>
+        <div
+            className="inline-flex items-stretch flex-grow w-1/2 p-4 border border-gray-300 sm:w-1/3 lg:w-1/6"
+            key={product.shopify_id}
+        >
+            <button className="flex flex-col items-start w-full" onClick={() => selectGroup(product)}>
                 <div className="mb-6">
                     <img src={product.image} className="max-h-full" alt={product.product_title} />
                 </div>
@@ -26,7 +29,7 @@ export function SubscriptionGroupsPicker() {
 
     return (
         <>
-            <div className="flex">{prodCols}</div>
+            <div className="flex flex-wrap">{prodCols}</div>
         </>
     );
 }

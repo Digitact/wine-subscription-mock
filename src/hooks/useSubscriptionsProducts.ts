@@ -5,7 +5,7 @@ interface ProductResponse {
     products: Product[];
 }
 
-const SUBSCRIPTION_URL = `${window.asset_url}app/api/subscriptionoptions/${window.permanent_domain}`;
+const SUBSCRIPTION_URL = `${window.asset_url}/app/api/subscriptionoptions/${window.permanent_domain}`;
 
 export function useSubscriptionsProducts() {
     const { data, error, isLoading, isSuccess, isError } = useQuery<ProductResponse>(['products'], async () => {

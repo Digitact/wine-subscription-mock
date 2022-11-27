@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useStoreContext } from '@/store/context';
 import { useAddToCartMutation } from '@/hooks/useAddToCartMutation';
 import { FlowSelection } from '../FlowSelection';
+import { Button } from '../Button';
 
 export function AddToCart() {
     const { state } = useStoreContext();
@@ -44,22 +45,16 @@ export function AddToCart() {
     return (
         <div>
             <h3>Your subscription is ready.</h3>
-            <FlowSelection />
-            <div className="my-4">
-                <div>
-                    <div className="w-1/4">
-                        <img src={selectedProduct?.image} className="w-full" alt={selectedProduct?.product_title} />
-                    </div>
-                    <div>
-                        <button
-                            className="w-full px-8 py-4 text-white bg-black"
-                            disabled={isLoading}
-                            onClick={addToShopify}
-                        >
-                            Add To Cart
-                        </button>
-                        {errorMessage !== '' ? <div className="mt-2 alert alert-danger">{errorMessage}</div> : <></>}
-                    </div>
+            <div className="flex flex-wrap w-full my-4 -mx-3">
+                <div className="w-1/5 px-3">
+                    <img src={selectedProduct?.image} className="w-full" alt={selectedProduct?.product_title} />
+                </div>
+                <FlowSelection className="flex-grow w-4/5 px-3" />
+                <div className="w-full py-4">
+                    <Button disabled={isLoading} onClick={addToShopify}>
+                        Add To Cart
+                    </Button>
+                    {errorMessage !== '' ? <div className="mt-2 text-red-500">{errorMessage}</div> : <></>}
                 </div>
             </div>
         </div>

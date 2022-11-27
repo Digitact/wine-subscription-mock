@@ -25,24 +25,21 @@ export function GlobalPicker() {
                 </div>
             </div>
             <div className="flex scrollable">
-                <div className="flex">
+                <div className="flex flex-wrap">
                     {state.caseItems.map((item, index) => (
-                        <div
-                            key={item.title + index + item.shopify_id}
-                            className={clsx('w-1/2', index % 2 ? 'case-item-light' : 'case-item-dark')}
-                        >
-                            <CaseItem
-                                onIncrement={() => handleIncrement(item)}
-                                onDecrement={() => handleDecrement(item)}
-                                image={item.image}
-                                title={item.title}
-                                disabled={state.selectedCaseCount === state.caseSize}
-                                wineType={item.wine_type}
-                                quantity={Number(item.quantity)}
-                                maxQuantity={Number(item.max)}
-                                minQuantity={Number(item.min)}
-                            />
-                        </div>
+                        <CaseItem
+                            key={item.image}
+                            className={clsx('w-1/2', index % 3 ? 'case-item-light' : 'case-item-dark')}
+                            onIncrement={() => handleIncrement(item)}
+                            onDecrement={() => handleDecrement(item)}
+                            image={item.image}
+                            title={item.title}
+                            disabled={state.selectedCaseCount === state.caseSize}
+                            wineType={item.wine_type}
+                            quantity={Number(item.quantity)}
+                            maxQuantity={Number(item.max)}
+                            minQuantity={Number(item.min)}
+                        />
                     ))}
                 </div>
             </div>

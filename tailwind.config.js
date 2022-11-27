@@ -9,7 +9,12 @@ module.exports = {
       serif: ['Garamond', 'Baskerville', 'Caslon', 'serif'],
     },
     extend: {
-      dark: '#212529',
+      colors: {
+        primary: '#212529',
+      },
+      animation: {
+        'spin-fast': 'spin 0.5s linear infinite',
+      },
     },
   },
   plugins: [],

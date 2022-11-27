@@ -10,7 +10,7 @@ import WineOrange from '@/assets/WineOrange.png';
 import WineSweet from '@/assets/WineSweet.png';
 import WineFortified from '@/assets/WineFortified.png';
 import { useStoreContext } from '@/store/context';
-import { WineType } from '@/utils/types';
+import { ProductCaseWine, WineType } from '@/utils/types';
 
 const wineTypeIcons = {
     [WineType.Red]: GenericRed,
@@ -38,17 +38,18 @@ export function CaseDiagram() {
 
     const diagramClass = 'flex case-diagram case-' + state.caseSize;
 
+    const actualBottles = state.caseItems.reduce((bottles, item) => {
+        const items: ProductCaseWine[] = Array(Number(item.quantity)).fill(item);
+        return [...bottles, ...items];
+    }, [] as ProductCaseWine[]);
+
     return (
         <div className={diagramClass}>
-            <img
-                className="case-background"
-                src={`${window.asset_url}${wineBackgrounds[state.caseSize]}`}
-                alt="background"
-            />
-            {state.caseItems.map((item, index) => {
+            <img className="case-background" src={wineBackgrounds[state.caseSize]} alt="background" />
+            {actualBottles.map((item, index) => {
                 return (
                     <img
-                        key={item.shopify_id}
+                        key={item.image + index}
                         className={`bottle-${state.caseSize}-${index}`}
                         src={wineTypeIcons[item.wine_type]}
                         alt={item.title}
@@ -56,11 +57,7 @@ export function CaseDiagram() {
                 );
             })}
 
-            <img
-                className="case-foreground"
-                src={`${window.asset_url}${wineForegrounds[state.caseSize]}`}
-                alt="foreground"
-            />
+            <img className="case-foreground" src={wineForegrounds[state.caseSize]} alt="foreground" />
         </div>
     );
 }
